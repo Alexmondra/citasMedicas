@@ -1,0 +1,9 @@
+#Restringir el acceso a los directorios
+Options All -Indexes
+
+#habilitar el motor de reescritura
+RewriteEngine On
+
+RewriteRule ^([a-z0-9]+)\/?([a-zA-Z0-9]*)\/?([a-z0-9]*)$ index.php?controller=$1&action=$2&id=$3
+
+#revisar otras funcionalidades a implementar en htaccess
