@@ -43,9 +43,9 @@
                         <div class="col-lg-12">
                             <div class="table-responsive">
                                 <!-- .table -->
-                                <table class="table table-striped" >
+                                <table class="table table-striped">
                                     <!-- thead -->
-                                    <thead class="thead-"> 
+                                    <thead class="thead-">
                                         <tr>
                                             <th> # </th>
                                             <th> Dni paciente </th>
@@ -58,7 +58,7 @@
                                         </tr>
                                     </thead><!-- /thead -->
                                     <!-- tbody -->
-                                    <tbody id ="tablaDat" >
+                                    <tbody id="tablaDat">
 
                                         <?php $cont=0; foreach($data["cita"] as $row): $cont++;?>
                                         <tr>
@@ -68,8 +68,16 @@
                                             <td><?php echo $row["nombre_medico"]?></td>
                                             <td><?php echo $row["detalle"]?></td>
                                             <td><?php echo $row["estado"]?></td>
-                                            <td><?php echo $row["entrada"]?></td>
-                                            <td><?php echo $row["salida"]?></td>
+                                            <td>
+                                                <a class="btn btn-info btn-sm">iniciar
+                                                    <i class="fa fa-play"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-danger btn-sm">terminar
+                                                    <i class="fa fa-play"></i>
+                                                </a>
+                                            </td>
 
                                         </tr>
                                         <?php endforeach?>
@@ -100,15 +108,15 @@
             </div><!-- /.page-section -->
         </div><!-- /.page-inner -->
     </div><!-- /.page -->
-</div> 
+</div>
 
 <script>
-        $(document).ready(function(){
-         $("#buscar").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
+$(document).ready(function() {
+    $("#buscar").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
         $("#tablaDat tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    });
-                });
-            });
-    </script>
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+</script>

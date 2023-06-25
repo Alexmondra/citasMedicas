@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
+    
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!-- End Required meta tags -->
@@ -75,7 +77,7 @@
           <div class="top-bar-brand">
             <!-- toggle aside menu -->
             <button class="hamburger hamburger-squeeze mr-2" type="button" data-toggle="aside-menu" aria-label="toggle aside menu"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button> <!-- /toggle aside menu -->
-            <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28" viewbox="0 0 351 100">
+            <a href="index.html"> <img src="<?php echo BASE_URL?>img/logoazuloriginal.png" height="28">
                 <defs>
                   <path id="a" d="M156.538 45.644v1.04a6.347 6.347 0 0 1-1.847 3.98L127.708 77.67a6.338 6.338 0 0 1-3.862 1.839h-1.272a6.34 6.34 0 0 1-3.862-1.839L91.728 50.664a6.353 6.353 0 0 1 0-9l9.11-9.117-2.136-2.138a3.171 3.171 0 0 0-4.498 0L80.711 43.913a3.177 3.177 0 0 0-.043 4.453l-.002.003.048.047 24.733 24.754-4.497 4.5a6.339 6.339 0 0 1-3.863 1.84h-1.27a6.337 6.337 0 0 1-3.863-1.84L64.971 50.665a6.353 6.353 0 0 1 0-9l26.983-27.008a6.336 6.336 0 0 1 4.498-1.869c1.626 0 3.252.622 4.498 1.87l26.986 27.006a6.353 6.353 0 0 1 0 9l-9.11 9.117 2.136 2.138a3.171 3.171 0 0 0 4.498 0l13.49-13.504a3.177 3.177 0 0 0 .046-4.453l.002-.002-.047-.048-24.737-24.754 4.498-4.5a6.344 6.344 0 0 1 8.996 0l26.983 27.006a6.347 6.347 0 0 1 1.847 3.98zm-46.707-4.095l-2.362 2.364a3.178 3.178 0 0 0 0 4.501l2.362 2.364 2.361-2.364a3.178 3.178 0 0 0 0-4.501l-2.361-2.364z"></path>
                 </defs>
@@ -343,7 +345,7 @@
               </ul><!-- /.nav -->
               <!-- .btn-account -->
               <div class="dropdown d-none d-md-flex">
-                <button class="btn-account" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="user-avatar user-avatar-md"><img src="assets/images/avatars/profile.jpg" alt=""></span> <span class="account-summary pr-lg-4 d-none d-lg-block"><span class="account-name">Beni Arisandi</span> <span class="account-description">Marketing Manager</span></span></button> <!-- .dropdown-menu -->
+                <button class="btn-account" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="user-avatar user-avatar-md"><img src="<?php echo BASE_URL?>img/doctor_login.jpg" alt=""></span> <span class="account-summary pr-lg-4 d-none d-lg-block"><span class="account-name">Beni Arisandi</span> <span class="account-description">Marketing Manager</span></span></button> <!-- .dropdown-menu -->
                 <div class="dropdown-menu">
                   <div class="dropdown-arrow d-lg-none" x-arrow=""></div>
                   <div class="dropdown-arrow ml-3 d-none d-lg-block"></div>
@@ -390,10 +392,10 @@
                   <a href="#" class="menu-link"><span class="menu-icon far fa-file"></span> <span class="menu-text">PACIENTE</span> <span class="badge badge-warning">New</span></a> <!-- child menu -->
                   <ul class="menu">
                     <li class="menu-item">
-                      <a href="page-clients.html" class="menu-link">AGREGAR CITA</a>
+                      <a href="<?php echo BASE_URL?>paciente" class="menu-link">AGREGAR CITA</a>
                     </li>
                     <li class="menu-item">
-                      <a href="page-teams.html" class="menu-link">REPROGRAMAR CITA</a>
+                      <a href="<?php echo BASE_URL?>paciente/reprogramar" class="menu-link">REPROGRAMAR CITA</a>
                     </li>
                   
                   </ul><!-- /child menu -->
@@ -406,7 +408,7 @@
                       <a href="<?php echo BASE_URL?>admisionista" class="menu-link">VALIDAR CITAS</a>
                     </li>
                     <li class="menu-item">
-                      <a href="<?php echo BASE_URL?>persona" class="menu-link">REGISTRAR CITA</a>
+                      <a href="<?php echo BASE_URL?>paciente" class="menu-link">REGISTRAR CITA</a>
                     </li> 
                     <li class="menu-item">
                       <a href="<?php echo BASE_URL?>admisionista/pagos" class="menu-link">PAGOS</a>
@@ -430,10 +432,10 @@
                   <a href="#" class="menu-link"><span class="menu-icon oi oi-person"></span> <span class="menu-text">DOCTOR</span></a> <!-- child menu -->
                   <ul class="menu">
                     <li class="menu-item">
-                      <a href="user-profile.html" class="menu-link">ATENCION</a>
+                      <a href="<?php echo BASE_URL?>medico" class="menu-link">ATENCION</a>
                     </li>
                     <li class="menu-item">
-                      <a href="user-activities.html" class="menu-link">REPORTE DE ATENCION</a>
+                      <a href="<?php echo BASE_URL?>medico/reporteAtencion" class="menu-link">REPORTE DE ATENCION</a>
                     </li>
                   </ul><!-- /child menu -->
                 </li><!-- /.menu-item -->
@@ -442,10 +444,10 @@
                   <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span class="menu-text">ADMINISTRADOR</span> <span class="badge badge-subtle badge-success">+4</span></a> <!-- child menu -->
                   <ul class="menu">
                     <li class="menu-item">
-                      <a href="layout-blank.html" class="menu-link">REPORTES</a>
+                      <a href="#" class="menu-link">REPORTES</a>
                     </li>
                     <li class="menu-item">
-                      <a href="layout-nosearch.html" class="menu-link">DOCUMENTACION</a>
+                      <a href="#" class="menu-link">DOCUMENTACION</a>
                     </li>
                     <li class="menu-item has-child">
                       <a href="#" class="menu-link">DOCTOR</a> <!-- grand child menu -->

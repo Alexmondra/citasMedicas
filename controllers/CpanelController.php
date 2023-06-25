@@ -9,6 +9,7 @@ class CpanelController{
     public function index(){
 
        $data["titulo"] = "Administración principal";
+       //$data["contenido"]= "views/inicio/login.php";
        $data["contenido"] ="views/dashboard/content.php";
        require_once TEMPLATE;
     }

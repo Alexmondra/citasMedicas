@@ -25,7 +25,7 @@
                                 <option value="<?php echo $row["nombre"]; ?>"><?php echo $row["nombre"]; ?></option>
                                 <?php endforeach; ?>
                             </select>
-                        </div>
+                        </div> 
                     </div>
                     <div class="mx-auto">
                         <div class="form-group">
@@ -33,7 +33,7 @@
                                 <?php foreach ($data["doctor"] as $row): ?>
                                 <option value="<?php echo $row["nombre"]; ?>"><?php echo $row["nombre"]; ?></option>
                                 <?php endforeach; ?>
-                            </select>
+                            </select> 
                         </div>
                     </div>
                 </div>

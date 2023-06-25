@@ -1,17 +1,17 @@
 <?php
 
 require_once "ValController.php";
-require_once "models/PersonaModel.php";
+require_once "models/PacienteModel.php";
       
-class PersonaController{
+class PacienteController{
     
-   protected $db;
+   protected $paciente;
    protected $errores;
    protected $validation;
 
    public function __construct(){
        session_start();
-       $this->db = new PersonaModel();
+       $this->paciente = new PacienteModel();
        $this->validation = new ValController();
        $this->errores = array(); 
    }
@@ -19,21 +19,26 @@ class PersonaController{
    public function index(){
 
       $data = array(
-      "contenido" => "views/personas/persona.php",
-      "titulo"    => "Administración de usarios",
-      "personas"  => $this->db->getAllResults()    
-      );
+         "contenido" => "views/pacientes/frmRegistrar.php",
+         "titulo"    => "formulario de registro",
+         "especialidad" => $this->paciente->getAllEspecialidad(),
+         "doctor" => $this->paciente->getAllDoctores()
+         );
 
       require_once TEMPLATE;
    }
 
-    public function frmRegistrar(){
-        $data = array(
-         "contenido" => "views/personas/frmRegistrar.php",
-         "titulo"    => "Formulario de registro de usuarios"    
-        );
-        require_once TEMPLATE;
-     }
+   public function reprogramar(){
+
+      $data = array(
+         "contenido" => "views/pacientes/reprogramacion.php",
+         "titulo"    => " Reprogramacion de citas",
+         );
+
+      require_once TEMPLATE;
+   }
+
+
 
      public function registrarDatos(){
       if($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -122,8 +127,4 @@ class PersonaController{
       header("Location: $url");
   }
 
-
-    
-
 }
-

@@ -1,6 +1,6 @@
 <?php
 
-class PersonaModel{
+class PacienteModel{
 
     protected $db;
     protected $registros;
@@ -9,11 +9,35 @@ class PersonaModel{
         $this->db = Conexion::conectar();
         $this->registros = array();
     }
+    
+    public function getAllEspecialidad(){
+        $sql = "SELECT * FROM especialidad";
+        $consulta = $this->db->query($sql);
+        $registros = array();
+        while ($row = $consulta->fetch_assoc()) {
+            $registros[] = $row;
+        }
+        return $registros;
+    }
+
+    public function getAllDoctores(){
+        $sql = "SELECT * FROM persona WHERE tipo_persona = 2";
+        $consulta = $this->db->query($sql);
+        $registros = array();
+        while ($row = $consulta->fetch_assoc()) {
+            $registros[] = $row;
+        }
+        return $registros;
+    }
+
+
+
 
 
     public function getAllResults(){
         
-        $sql = "SELECT * FROM personas";
+        $sql = "SELECT * FROM persona";
+
         $consulta = $this->db->query($sql);
 
         while($row = $consulta->fetch_assoc()){
