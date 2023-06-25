@@ -15,9 +15,9 @@ class Conexion{
             $user1 = "unp31mqern8zd8qk";
             
 
-            //$conn = new mysqli("$host","$user","$pass","$bd");
+            $conn = new mysqli("$host","$user","$pass","$bd");
 
-            $conn = new mysqli("localhost","root","root","citas_regional");
+            //$conn = new mysqli("localhost","root","root","citas_regional");
         if($conn->connect_error){
             throw new Excepcion($conn->connect_error);
         }else{
