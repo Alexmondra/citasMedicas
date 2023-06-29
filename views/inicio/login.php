@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="e">
 
 <head>
     <meta charset="UTF-8" />
@@ -13,19 +13,20 @@
 
 <body class="bg-info d-flex justify-content-center align-items-center vh-100">
     <div class="bg-white p-5 rounded-5 text-secondary shadow" style="width: 25rem">
+    
         <div class="d-flex justify-content-center">
-            <img src="/assets/login-icon.svg" alt="login-icon" style="height: 7rem" />
+            <img src="<?php echo BASE_URL?>img/logoazuloriginal.png" alt="login-icon" style="height: 5rem" />
         </div>
         <div class="text-center fs-1 fw-bold">Login</div>
         <div class="input-group mt-4">
             <div class="input-group-text bg-info">
-                <img src="/assets/username-icon.svg" alt="username-icon" style="height: 1rem" />
+                <img src="<?php echo BASE_URL?>img/username-icon.svg" alt="username-icon" style="height: 1rem" />
             </div>
             <input class="form-control bg-light" type="text" placeholder="Username" />
         </div>
         <div class="input-group mt-1">
             <div class="input-group-text bg-info">
-                <img src="/assets/password-icon.svg" alt="password-icon" style="height: 1rem" />
+                <img src="<?php echo BASE_URL?>img/password-icon.svg" alt="password-icon" style="height: 1rem" />
             </div>
             <input class="form-control bg-light" type="password" placeholder="Password" />
         </div>
@@ -52,7 +53,7 @@
             </div>
         </div>
         <div class="btn d-flex gap-2 justify-content-center border mt-3 shadow-sm">
-            <img src="/assets/google-icon.svg" alt="google-icon" style="height: 1.6rem" />
+            <img src="<?php echo BASE_URL?>img/google-icon.svg" alt="google-icon" style="height: 1.6rem" />
             <div class="fw-semibold text-secondary">Continue with Google</div>
         </div>
     </div>

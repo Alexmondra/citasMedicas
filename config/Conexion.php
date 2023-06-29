@@ -9,15 +9,17 @@ class Conexion{
             $bd ="bwkaescheczk2jl0iegf";
             $user = "ughazad9u9sepkyt";
 
-            $host1 = "bscb1actyqfwnbmpq8w9-mysql.services.clever-cloud.com";
-            $pass1 = "jI6WXMLB9wVxRx8WYAXS";
-            $bd1 ="bscb1actyqfwnbmpq8w9";
-            $user1 = "unp31mqern8zd8qk";
+            $host1 = "localhost";
+            $pass1 = "Root.666";
+            $bd1 ="id20039546_citas_regional";
+            $user1 = "id20039546_citas_regional666";
             
 
-            $conn = new mysqli("$host","$user","$pass","$bd");
+           // $conn = new mysqli("$host1","$user1","$pass1","$bd1");
 
-            //$conn = new mysqli("localhost","root","root","citas_regional");
+            //$conn = new mysqli("$host","$user","$pass","$bd");
+
+            $conn = new mysqli("localhost","root","root","citas_regional");
         if($conn->connect_error){
             throw new Excepcion($conn->connect_error);
         }else{

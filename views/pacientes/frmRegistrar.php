@@ -55,7 +55,8 @@
                                     <div class="col-md-4">
                                         <label class="col-md-4 control-label">cupos</label>
                                         <div class="col-md-8">
-                                            <input name="txtCupos" type="text" placeholder="" class="form-control" readonly>
+                                            <input name="txtCupos" type="text" placeholder="" class="form-control"
+                                                readonly>
 
                                         </div>
                                     </div>
@@ -229,7 +230,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <label class="col-md-4 control-label" for="button1id"></label>
-                                    <div class="col-md-8">
+                                    <div class="col-md-6">
                                         <input type="submit" value="REGISTRAR DATOS" class="btn btn-success">
                                         <a href="<?php echo BASE_URL?>paciente" class="btn btn-danger">CANCELAR
                                             REGISTRO</a>
@@ -248,27 +249,3 @@
         </div><!-- /.page-inner -->
     </div><!-- /.page -->
 </div>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js">
-</script>
-
-<script>
-$(document).ready(function() {
-    $('#datetimepicker').datetimepicker();
-
-    $('#btnGuardar').click(function() {
-        var fechaHoraSeleccionada = $('#datetimepicker').datetimepicker('date');
-        if (fechaHoraSeleccionada) {
-            $('#campoOculto').val(fechaHoraSeleccionada.format('YYYY-MM-DD HH:mm:ss'));
-            alert('Fecha y Hora guardadas: ' + fechaHoraSeleccionada.format('YYYY-MM-DD HH:mm:ss'));
-        } else {
-            alert('Por favor, selecciona una Fecha y Hora.');
-        }
-    });
-});
-</script>

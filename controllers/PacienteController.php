@@ -38,6 +38,16 @@ class PacienteController{
       require_once TEMPLATE;
    }
 
+   public function resultados(){
+
+      $data = array(
+         "contenido" => "views/pacientes/resultados.php",
+         "titulo"    => " RESULTADOS",
+         );
+
+      require_once TEMPLATE;
+   }
+
 
 
      public function registrarDatos(){

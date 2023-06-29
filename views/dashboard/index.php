@@ -389,7 +389,7 @@
                 </li><!-- /.menu-item -->
                 <!-- .menu-item -->
                 <li class="menu-item has-child">
-                  <a href="#" class="menu-link"><span class="menu-icon far fa-file"></span> <span class="menu-text">PACIENTE</span> <span class="badge badge-warning">New</span></a> <!-- child menu -->
+                  <a href="#" class="menu-link"><span class="menu-icon oi oi-person"></span> <span class="menu-text">PACIENTE</span> <span class="badge badge-warning">New</span></a> <!-- child menu -->
                   <ul class="menu">
                     <li class="menu-item">
                       <a href="<?php echo BASE_URL?>paciente" class="menu-link">AGREGAR CITA</a>
@@ -397,6 +397,9 @@
                     <li class="menu-item">
                       <a href="<?php echo BASE_URL?>paciente/reprogramar" class="menu-link">REPROGRAMAR CITA</a>
                     </li>
+                    <li class="menu-item">
+                      <a href="<?php echo BASE_URL?>paciente/resultados" class="menu-link">RESULTADOS</a>
+                    </li> 
                   
                   </ul><!-- /child menu -->
                 </li><!-- /.menu-item -->
