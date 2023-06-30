@@ -15,11 +15,12 @@ class Conexion{
             $user1 = "id20039546_citas_regional666";
             
 
-           // $conn = new mysqli("$host1","$user1","$pass1","$bd1");
+            //$conn = new mysqli("$host1","$user1","$pass1","$bd1");
 
             //$conn = new mysqli("$host","$user","$pass","$bd");
 
             $conn = new mysqli("localhost","root","root","citas_regional");
+
         if($conn->connect_error){
             throw new Excepcion($conn->connect_error);
         }else{

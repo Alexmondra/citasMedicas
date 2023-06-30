@@ -19,7 +19,7 @@
             <!-- .page-section -->
             <div class="row">
                 <div class="col-md-6">
-                    <img src="https://robohash.org/<?php echo $data["atencion"]["id_persona"]?>" alt="Imagen"
+                    <img src="https://robohash.org/<?php echo $data["atencion"]["id"]?>" alt="Imagen"
                         width="290" height="250">
                     <br><br>
                     <h4 class="text-center mt-4">Historias:</h4>
@@ -35,7 +35,7 @@
                 <div class="col-md-6">
                     <h3 class="card-title mb-4">Datos paciente</h3>
                     <p class="dni">DNI: <span
-                            class="dni-value"><?php echo $data["atencion"]["numero_documento"]; ?></span></p>
+                            class="dni-value"><?php echo $data["atencion"]["dni"]; ?></span></p>
                     <p class="name">Nombre: <span class="name-value"><?php echo $data["atencion"]["nombre"]; ?></span>
                     </p>
                     <div class="mt-4">

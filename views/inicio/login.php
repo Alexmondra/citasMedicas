@@ -43,10 +43,7 @@
         <div class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm">
             Login
         </div>
-        <div class="d-flex gap-1 justify-content-center mt-1">
-            <div>Don't have an account?</div>
-            <a href="#" class="text-decoration-none text-info fw-semibold">Register</a>
-        </div>
+
         <div class="p-3">
             <div class="border-bottom text-center" style="height: 0.9rem">
                 <span class="bg-white px-3">or</span>
@@ -54,7 +51,7 @@
         </div>
         <div class="btn d-flex gap-2 justify-content-center border mt-3 shadow-sm">
             <img src="<?php echo BASE_URL?>img/google-icon.svg" alt="google-icon" style="height: 1.6rem" />
-            <div class="fw-semibold text-secondary">Continue with Google</div>
+            <div class="fw-semibold text-secondary">Solicitar unirse</div>
         </div>
     </div>
 </body>

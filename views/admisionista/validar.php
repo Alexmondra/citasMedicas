@@ -69,12 +69,13 @@
                                             <td><?php echo $row["detalle"]?></td>
                                             <td><?php echo $row["estado"]?></td>
                                             <td>
-                                                <a class="btn btn-info btn-sm">iniciar
+                                                
+                                                <a href="<?php echo BASE_URL;?>admisionista/inicio/<?php echo $row["id"]?>"  class="btn btn-info btn-sm">iniciar
                                                     <i class="fa fa-play"></i>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger btn-sm">terminar
+                                                <a href="<?php echo BASE_URL;?>admisionista/fin/<?php  echo $row["id"]?>" class="btn btn-danger btn-sm">terminar
                                                     <i class="fa fa-play"></i>
                                                 </a>
                                             </td>

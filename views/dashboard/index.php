@@ -478,14 +478,13 @@
                       <a href="#" class="menu-link">ingresar como </a>
                       <ul class="menu">
                         <li class="menu-item">
-                          <a href="#" class="menu-link">admicionista</a>
+                          <a href="<?php echo BASE_URL?>admisionista" class="menu-link">admicionista</a>
                         </li>
                         <li class="menu-item">
-                          <a href="#" class="menu-link">doctor</a>
+                          <a href="<?php echo BASE_URL?>medico" class="menu-link">doctor</a>
                         </li>
                       </ul><!-- /grand child menu -->
                     </li>
-                  
                     
                   </ul><!-- /child menu -->
                 </li><!-- /.menu-item -->

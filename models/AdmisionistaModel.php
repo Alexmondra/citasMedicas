@@ -15,13 +15,13 @@ class AdmisionistaModel{
         
         $sql = "SELECT persona_paciente.numero_documento as dni, persona_paciente.nombre as nombre_paciente, 
                         persona_medico.nombre as nombre_medico, cita.detalle as detalle , cita.estado as estado , atencion_cita.entrada as entrada,
-                        atencion_cita.salida as salida , cita.fecha_cita as fechaCita
+                        atencion_cita.salida as salida , cita.fecha_cita as fechaCita ,atencion_cita.id_atencion as id
                 FROM atencion_cita  INNER JOIN cita on atencion_cita.id_cita = cita.id_cita
                                     INNER JOIN paciente ON cita.id_paciente = paciente.id_paciente
                                     INNER JOIN persona AS persona_paciente ON persona_paciente.id_persona = paciente.id_persona
                                     INNER JOIN usuario ON usuario.id_usuario = cita.id_medico 
                                     INNER JOIN persona AS persona_medico ON persona_medico.id_persona = usuario.id_persona
-                                    WHERE atencion_cita.salida IS NOT NULL";
+                                    WHERE atencion_cita.salida IS NULL";
         $consulta = $this->db->query($sql);
 
         while($row = $consulta->fetch_assoc()){
@@ -126,9 +126,15 @@ class AdmisionistaModel{
         $this->db->query($sql);
     }
 
-    public function delete($id){
-        $sql = "DELETE FROM personas where id_persona = '$id'";
+    public function setInicio($id){
+        $sql = "UPDATE atencion_cita SET entrada = CURRENT_TIME() where id_atencion = '$id'";
         $this->db->query($sql);
+
+    }
+    public function setFin($id){
+        $sql = "UPDATE atencion_cita SET salida = CURRENT_TIME() where id_atencion = '$id'";
+        $this->db->query($sql);
+
     }
     
 }

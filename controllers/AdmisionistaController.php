@@ -21,7 +21,7 @@ class AdmisionistaController{
       $data = array(
       "contenido" => "views/admisionista/validar.php",
       "titulo"    => "validar citas registradas",
-      "cita"  => $this->admisionista->getAllResults(),
+      "cita"  => $this->admisionista->getAllResults(), 
       "doctor" => $this->admisionista->getAllDoctores()    
       );
 
@@ -142,19 +142,30 @@ class AdmisionistaController{
    }
 
    
-   public function eliminar($id){
+   public function inicio($id){
       if($_SERVER["REQUEST_METHOD"]=="GET"){
         // $idd = $_GET["id"];
-         $this->db->delete($id);
+         $this->admisionista->setInicio($id);
 
-      }
-
-      $_SESSION['mensaje'] = "Datos eliminados correctamente";
-      $url = BASE_URL."persona";
+      $_SESSION['mensaje'] = "inicio de la consulta";
+      $url = BASE_URL."admisionista";
       header("Location: $url");
+   }
   }
+
+  public function fin($id){
+   if($_SERVER["REQUEST_METHOD"]=="GET"){
+     // $idd = $_GET["id"];
+      $this->admisionista->setFin($id);
+
+   $_SESSION['mensaje'] = "fin de la consulta";
+   $url = BASE_URL."admisionista";
+   header("Location: $url");
+    }
+   }
+
+  
 
 
     
-
 }

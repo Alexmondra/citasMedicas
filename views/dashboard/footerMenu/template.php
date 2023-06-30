@@ -3,7 +3,6 @@
 
 <head>
 
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -36,6 +35,12 @@
     <link rel="apple-touch-icon" sizes="144x144" href="assets/apple-touch-icon.png">
     <link rel="shortcut icon" href="assets/favicon.ico">
     <meta name="theme-color" content="#3063A0"><!-- End FAVICONS -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+    <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+
+
     <!-- GOOGLE FONT -->
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End GOOGLE FONT -->
     <!-- BEGIN PLUGINS STYLES -->
@@ -74,15 +79,22 @@
 
     <header>
         <nav>
-            <div class="col-md-6 d-flex justify-content-end align-items-start">
-                <footer class="aside-footer border-top p-2">
-                    <button class="btn btn-light btn-block text-primary" data-toggle="skin"><span
-                            class="d-compact-menu-none">Night
-                            mode</span> <i class="fas fa-moon ml-1"></i></button>
-                    <ul class="d-flex">
-                        <li><a href="<?php echo BASE_URL?>vista/login" class="mr-3">INICIAR SESIÓN</a></li>
-                        <li><a href="../index.html" class="mr-3">REGISTRARSE</a></li>
+            <div class="row justify-content-end">
+                <div class="col-auto">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="nightModeSwitch" data-toggle="skin" >
+                        <label class="custom-control-label" for="nightModeSwitch">modo</label>
+                    </div>
+                </div>
+                <br> <br>
+                <div class="col-auto">
+                    <ul class="nav justify-content-end">
+                        <li class="nav-item">
+                            <a href="<?php echo BASE_URL?>vista/login" class="nav-link btn btn-primary">INICIAR
+                                SESIÓN</a>
+                        </li>
                     </ul>
+                </div>
             </div>
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                 <div class="row">
@@ -94,16 +106,13 @@
                 <div class="collapse navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">inicion <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="<?php echo BASE_URL?>vista">Inicio <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="#">Nosotros</a>
+                            <a class="nav-link " href="#">Servicios</a>
                         </li>
                         <li class="nav-item" id="productos">
-                            <a class="nav-link" href="#" id="navbarDropdown">Productos </a>
-                        </li>
-                        <li class="nav-item " id="tiendas">
-                            <a class="nav-link" href="#">Tiendas </a>
+                            <a class="nav-link" href="<?php echo BASE_URL?>vista/especialidad" id="navbarDropdown">Especialidades </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contacto</a>
@@ -118,6 +127,7 @@
         </nav>
 
     </header>
+
     <?php require_once $data["contenido"];?>
 
     <footer class="footer">
@@ -166,17 +176,19 @@
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <h4>Siguenos</h4>
-                    <ul>
-                        <li><a href="enlace1">  <i class="fa fa-play"></i></a></li>
-                        <li><a href="enlace2">  <i class="fa fa-play"></i></a></li>
-                        <li><a href="enlace3">  <i class="fa fa-play"></i></a></li>
-                    </ul>
+                    <h4>Redes Sociales</h2>
+                        <div class="sociales">
+                            <a href="enlace1" class="fa fa-facebook"></a>
+                            <a href="enlace1" class="fa fa-instagram"></a>
+                            <a href="enlace1" class="fa fa-youtube"></a>
+                        </div>
 
                 </div>
             </div>
             <hr>
-            <p class="text-center">© 2023 Tu Empresa. Todos los derechos reservados.</p>
+            <div class="footer-final">
+                <small>© 2023 HOSPITAL REGIONAL LAMBAYEQUE - Todos los Derechos Reservados</small>
+            </div>
         </div>
     </footer>
 

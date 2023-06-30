@@ -22,9 +22,8 @@ class PacienteController{
          "contenido" => "views/pacientes/frmRegistrar.php",
          "titulo"    => "formulario de registro",
          "especialidad" => $this->paciente->getAllEspecialidad(),
-         "doctor" => $this->paciente->getAllDoctores()
+         "medico" => $this->paciente->getAllDoctores()
          );
-
       require_once TEMPLATE;
    }
 
@@ -53,6 +52,10 @@ class PacienteController{
      public function registrarDatos(){
       if($_SERVER["REQUEST_METHOD"]=="POST"){
          //obtener valores del formulario mediante POST
+         $especialidad = $_POST["selectorEspe"];
+         $medico = $_POST["selectorMedi"];
+
+
          $nombre = $_POST["txtNombres"];
          $apPaterno = $_POST["txtApPaterno"];
          $apMaterno = $_POST["txtApMaterno"];
@@ -83,6 +86,7 @@ class PacienteController{
                "perfil" =>$perfil
             ];
             $this->db->save($dataPersona);
+            
 
             $_SESSION["mensaje"] ="Datos registrados correctamente";
 

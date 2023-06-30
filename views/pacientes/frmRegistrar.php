@@ -23,7 +23,7 @@
                 <div class="section-block">
                     <!-- metric row -->
                     <div class="metric-row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12"> 
                             <form action="<?php echo BASE_URL;?>paciente/registrarDatos" method="POST"
                                 autocomplete="off">
                                 <div class="row">
@@ -31,9 +31,9 @@
                                         <label class="col-md-4 control-label"
                                             for="selectEspecialidadDoctor">Especialidad:</label>
                                         <div class="form-group">
-                                            <select name="mi-selector" class="form-control" style="max-width: 200px;">
+                                            <select name="selectorEspe" class="form-control" style="max-width: 200px;"onchange="<?php echo BASE_URL;?>paciente/medicoEspe(this.value)" >
                                                 <?php foreach ($data["especialidad"] as $row): ?>
-                                                <option value="<?php echo $row["nombre"]; ?>">
+                                                <option value="<?php echo $row["id_especialidad"]; ?>">
                                                     <?php echo $row["nombre"]; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
@@ -43,20 +43,19 @@
                                     <div class="col-md-4">
                                         <label class="col-md-4 control-label" for="selectDoctor">Doctor:</label>
                                         <div class="form-group">
-                                            <select name="mi-selector" class="form-control" style="max-width: 200px;">
-                                                <?php foreach ($data["doctor"] as $row): ?>
+                                            <select name="selectorMedi" class="form-control" style="max-width: 200px;">
+                                                <?php foreach ($data["medico"] as $row): ?>
                                                 <option value="<?php echo $row["nombre"]; ?>">
                                                     <?php echo $row["nombre"]; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
                                     </div>
-
+                                    
                                     <div class="col-md-4">
                                         <label class="col-md-4 control-label">cupos</label>
                                         <div class="col-md-8">
-                                            <input name="txtCupos" type="text" placeholder="" class="form-control"
-                                                readonly>
+                                            <input readonly name="txtCupos" type="text" class="form-control"  value <?php ?> >
 
                                         </div>
                                     </div>
@@ -203,7 +202,7 @@
                                     </div>
                                 </div>
                                 <div class="container-fluid">
-                                    <h1>selecionar la fecha y hora de la cita</h1>
+                                    <p>Selecionar la fecha y hora de la cita</p>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="row">
@@ -236,9 +235,7 @@
                                             REGISTRO</a>
                                     </div>
                                 </div>
-
-
-                                </fieldset>
+                              
                             </form>
                         </div><!-- metric column -->
 
