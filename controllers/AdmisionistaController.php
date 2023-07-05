@@ -67,53 +67,6 @@ class AdmisionistaController{
    }
 
 
-     public function registrarDatos(){
-      if($_SERVER["REQUEST_METHOD"]=="POST"){
-         //obtener valores del formulario mediante POST
-         $nombre = $_POST["txtNombres"];
-         $apPaterno = $_POST["txtApPaterno"];
-         $apMaterno = $_POST["txtApMaterno"];
-         $correo = $_POST["txtCorreo"];
-         $usuario = $_POST["txtUsuario"];
-         $contrasenia =$_POST["txtContrasenia"];
-         $perfil = $_POST["cboPerfil"];
-         
-         $this->validarNombre($nombre);
-         $this->validarApPaterno($apPaterno);
-
-         if($this->errores){
-            $data = array(
-               "contenido" => "views/personas/frmRegistrar.php",
-               "titulo"    => "Formulario de registro de usuarios",
-               "errores"   => $this->errores    
-              );
-              require_once TEMPLATE;
-         }else{
-            //arreglo asociativo de los datos enviados por POST
-            $dataPersona = [
-               "nombres" => $nombre,
-               "apPaterno" => $apPaterno,
-               "apMaterno" =>$apMaterno,
-               "correo" =>$correo,
-               "usuario" =>$usuario,
-               "contrasenia" => $this->validation->sanitizacion($contrasenia),
-               "perfil" =>$perfil
-            ];
-            $this->db->save($dataPersona);
-
-            $_SESSION["mensaje"] ="Datos registrados correctamente";
-
-            $url = BASE_URL."persona";
-            header("Location: $url");
-         }
-        
-      }else{
-         $data["contenido"] = ERROR_404;
-         require_once TEMPLATE;
-      }
-   }
-
-
    private function validarNombre($valor){
 
       $opciones = array(
@@ -143,9 +96,12 @@ class AdmisionistaController{
 
    
    public function inicio($id){
+
+      
       if($_SERVER["REQUEST_METHOD"]=="GET"){
         // $idd = $_GET["id"];
-         $this->admisionista->setInicio($id);
+
+      $this->admisionista->setInicio($id);
 
       $_SESSION['mensaje'] = "inicio de la consulta";
       $url = BASE_URL."admisionista";

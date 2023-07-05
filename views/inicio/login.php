@@ -15,18 +15,18 @@
     <div class="bg-white p-5 rounded-5 text-secondary shadow" style="width: 25rem">
     
         <div class="d-flex justify-content-center">
-            <img src="<?php echo BASE_URL?>img/logoazuloriginal.png" alt="login-icon" style="height: 5rem" />
+            <img src="<?php echo BASE_URL?>public/img/logoazuloriginal.png" alt="login-icon" style="height: 5rem" />
         </div>
         <div class="text-center fs-1 fw-bold">Login</div>
         <div class="input-group mt-4">
             <div class="input-group-text bg-info">
-                <img src="<?php echo BASE_URL?>img/username-icon.svg" alt="username-icon" style="height: 1rem" />
+                <img src="<?php echo BASE_URL?>public/img/username-icon.svg" alt="username-icon" style="height: 1rem" />
             </div>
             <input class="form-control bg-light" type="text" placeholder="Username" />
         </div>
         <div class="input-group mt-1">
             <div class="input-group-text bg-info">
-                <img src="<?php echo BASE_URL?>img/password-icon.svg" alt="password-icon" style="height: 1rem" />
+                <img src="<?php echo BASE_URL?>public/img/password-icon.svg" alt="password-icon" style="height: 1rem" />
             </div>
             <input class="form-control bg-light" type="password" placeholder="Password" />
         </div>

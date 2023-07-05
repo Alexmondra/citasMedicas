@@ -101,7 +101,7 @@
 
                 </div>
                 <a class="navbar-brand" href="#">
-                    <img src="<?php echo BASE_URL?>img/logoazuloriginal.png" height="28">
+                    <img src="<?php echo BASE_URL?>public/img/logoazuloriginal.png" height="28">
                 </a>
                 <div class="collapse navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav ml-auto">

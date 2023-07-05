@@ -69,15 +69,34 @@
                                             <td><?php echo $row["detalle"]?></td>
                                             <td><?php echo $row["estado"]?></td>
                                             <td>
-                                                
-                                                <a href="<?php echo BASE_URL;?>admisionista/inicio/<?php echo $row["id"]?>"  class="btn btn-info btn-sm">iniciar
+                                                <?php if($row["estado"] == "En atencion"){?>
+                                                <a href="<?php echo BASE_URL;?>admisionista/inicio/<?php echo $row["id"]?>"
+                                                    class="btn btn-info btn-sm disabled" role="button"
+                                                    aria-disabled="true">
+                                                    iniciar <i class="fa fa-play"></i>
+                                                </a>
+                                                <?php }else{?>
+                                                <a href="<?php echo BASE_URL;?>admisionista/inicio/<?php echo $row["id"]?>"
+                                                    class="btn btn-info btn-sm">iniciar
                                                     <i class="fa fa-play"></i>
                                                 </a>
+                                                <?php  } ?>
+
                                             </td>
                                             <td>
-                                                <a href="<?php echo BASE_URL;?>admisionista/fin/<?php  echo $row["id"]?>" class="btn btn-danger btn-sm">terminar
+                                                <?php if($row["entrada"] == NULL && $row["entrada"] == ""){?>
+                                                <a href="<?php echo BASE_URL;?>admisionista/fin/<?php  echo $row["id"]?>"
+                                                    class="btn btn-danger btn-sm disabled" role="button"
+                                                    aria-disabled="true">terminar
                                                     <i class="fa fa-play"></i>
                                                 </a>
+                                                <?php }else{?>
+                                                <a href="<?php echo BASE_URL;?>admisionista/fin/<?php  echo $row["id"]?>"
+                                                    class="btn btn-danger btn-sm">terminar
+                                                    <i class="fa fa-play"></i>
+                                                </a>
+
+                                                <?php  } ?>
                                             </td>
 
                                         </tr>
