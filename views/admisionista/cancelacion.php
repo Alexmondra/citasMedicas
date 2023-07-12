@@ -27,7 +27,6 @@
             </header>
             <div class="row" id ="tablaDat">
 
-            
                 <?php $cont=0; foreach($data["citas"] as $row): $cont++;?>
                 <div class="col-12 col-lg-12 col-xl-4">
                     <div class="card card-fluid">

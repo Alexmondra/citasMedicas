@@ -82,8 +82,12 @@
             <div class="row justify-content-end">
                 <div class="col-auto">
                     <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="nightModeSwitch" data-toggle="skin" >
-                        <label class="custom-control-label" for="nightModeSwitch">modo</label>
+                        <input type="checkbox" class="custom-control-input" id="checkbox" data-toggle="skin">
+                        <label for="checkbox" class="checkbox-label">
+                            <i class="fas fa-moon"></i>
+                            <i class="fas fa-sun"></i>
+                            <span class="ball"></span>
+                        </label>
                     </div>
                 </div>
                 <br> <br>
@@ -106,13 +110,15 @@
                 <div class="collapse navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="<?php echo BASE_URL?>vista">Inicio <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="<?php echo BASE_URL?>vista">Inicio <span
+                                    class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="#">Servicios</a>
                         </li>
                         <li class="nav-item" id="productos">
-                            <a class="nav-link" href="<?php echo BASE_URL?>vista/especialidad" id="navbarDropdown">Especialidades </a>
+                            <a class="nav-link" href="<?php echo BASE_URL?>vista/especialidad"
+                                id="navbarDropdown">Especialidades </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contacto</a>
@@ -217,3 +223,11 @@
 </body>
 
 </html>
+
+<script>
+    const checkbox = document.getElementById("checkbox")
+    checkbox.addEventListener("change", () => {
+        document.body.classList.toggle("dark")
+    });
+    
+</script>

@@ -7,7 +7,7 @@
             <header class="page-title-bar">
                 <div class="d-flex flex-column flex-md-row">
                     <p class="lead">
-                        <span class="font-weight-bold"><?php echo $data["titulo"]?></span> 
+                        <span class="font-weight-bold"><?php echo $data["titulo"]?></span>
                         <!--<span class="d-block text-muted">Here’s what’s happening with your business today.</span>-->
                     </p>
                 </div>
@@ -34,7 +34,6 @@
                                     </thead><!-- /thead -->
                                     <!-- tbody -->
                                     <tbody>
-                                        
                                         <?php $cont=0; foreach($data["productos"] as $row): $cont++;?>
                                         <tr>
                                             <td><?php echo $cont;?></td>
@@ -42,10 +41,12 @@
                                             <td><?php echo $row["precio"]?></td>
                                             <td> <?php echo $row["nombreCat"]?></td>
                                             <td>
-                                                <a href="<?php echo BASE_URL;?>producto/frmEditar/<?php  echo $row["id"]?>" class="btn btn-info btn-sm">editar 
-                                                <i class="fa fa-edit"></i> </a>
-                                                <a href="<?php echo BASE_URL;?>producto/eliminar/<?php echo $row["id"]?>" class="btn btn-dark btn-sm">eliminar 
-                                                <i class="fa fa-trash"></i></a>
+                                                <a href="<?php echo BASE_URL;?>producto/frmEditar/<?php  echo $row["id"]?>"
+                                                    class="btn btn-info btn-sm">editar
+                                                    <i class="fa fa-edit"></i> </a>
+                                                <a href="<?php echo BASE_URL;?>producto/eliminar/<?php echo $row["id"]?>"
+                                                    class="btn btn-dark btn-sm">eliminar
+                                                    <i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                         <?php endforeach?>

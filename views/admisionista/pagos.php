@@ -95,6 +95,15 @@
             </div>
             <form id="formModulos" autocomplete="off">
                 <div class="modal-body">
+                    <div class="form-group row" id="divmonto">
+                        <label for="exampleInputEmail1" class="col-sm-4 col-form-label text-right">ingrese el
+                            monto:</label>
+                        <div class="col-md-7">
+                            <input type="number" class="form-control" id="txtIcon" name="txtIcon">
+                            <small class="text-danger "><b id="errtxtIcon"></b></small>
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         <label for="colFormLabel" class="col-sm-4 col-form-label text-right">Tipo pago:</label>
                         <div class="col-sm-7">
@@ -106,15 +115,6 @@
                             </select>
                         </div>
                     </div>
-                    <!--
-                    <div class="form-group row" id="divmonto">
-                        <label for="exampleInputEmail1" class="col-sm-4 col-form-label text-right">ingrese el
-                            monto:</label>
-                        <div class="col-md-7">
-                            <input type="number" class="form-control" id="txtIcon" name="txtIcon">
-                            <small class="text-danger "><b id="errtxtIcon"></b></small>
-                        </div>
-                    </div> -->
 
                     <div class="form-group row d-none" id="divQR">
                         <div class="col-12 text-center">
@@ -138,8 +138,7 @@
                 <div class="modal-footer justify-content-center">
                     <a href="" class="btn btn-width btn-secondary btn-flat">CANCELAR</a>
                     <button type="button" class="btn btn-width btn-success btn-flat" id="btnRegistrar"
-                        data-dismiss="modal"
-                        onclick="registrarDatos(<?php echo $row['id_cita']; ?>, '2')">
+                        data-dismiss="modal" onclick="registrarDatos(<?php echo $row['id_cita']; ?>, '2')">
                         REGISTRAR DATOS
                     </button>
                 </div>

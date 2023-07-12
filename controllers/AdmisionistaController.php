@@ -56,7 +56,7 @@ class AdmisionistaController{
       );
       require_once TEMPLATE;
       }
-
+ 
    public function reprogramar(){
          $data = array(
           "contenido" => "views/admisionista/reprogramaciones.php",

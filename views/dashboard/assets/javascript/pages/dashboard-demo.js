@@ -33,6 +33,7 @@ var DashboardDemo = /*#__PURE__*/function () {
         }]
       }; // init chart bar
 
+      /*
       var canvas = $('#completion-tasks')[0].getContext('2d');
       var chart = new Chart(canvas, {
         type: 'bar',
@@ -69,7 +70,7 @@ var DashboardDemo = /*#__PURE__*/function () {
             }]
           }
         }
-      });
+      });*/
     }
   }]);
 

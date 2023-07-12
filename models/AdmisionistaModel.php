@@ -23,7 +23,7 @@ class AdmisionistaModel{
                                     INNER JOIN persona AS persona_paciente ON persona_paciente.id_persona = paciente.id_persona
                                     INNER JOIN usuario ON usuario.id_usuario = cita.id_medico 
                                     INNER JOIN persona AS persona_medico ON persona_medico.id_persona = usuario.id_persona
-                                    WHERE atencion_cita.salida IS NULL";
+                                    WHERE atencion_cita.salida IS NULL AND cita.estado_pago = 1";
         $consulta = $this->db->query($sql);
 
         while($row = $consulta->fetch_assoc()){

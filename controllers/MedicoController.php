@@ -15,11 +15,11 @@ class MedicoController{
        $this->validation = new ValController();
        $this->errores = array(); 
    }
-
+ 
    public function index(){
 
       $data = array(
-      "contenido" => "views/medico/atencion.php",
+      "contenido" => "views/medico/atencion.php", 
       "titulo"    => "atender cita actual",
       "atencion"  => $this->medico->getAtencion(),
       "historias" => $this->medico->getHistorias()
@@ -38,46 +38,48 @@ class MedicoController{
       require_once TEMPLATE;
    }
 
-     public function registrarDatos(){
+   public function horario(){
+      $data = array(
+         "contenido" => "views/medico/horario.php",
+         "titulo"    => "ELECCION DE HORARIO DE ATENCION",
+         "horario"  => $this->medico->gethorario()
+         );
+   
+         require_once TEMPLATE;
+   }
+
+   public function verhorario($id){
+      $data = $this->medico->getResultID($id);
+      echo json_encode(array("data" => $data));
+      //die(json_encode($data));
+   }
+
+   public function registrarNuevo(){
       if($_SERVER["REQUEST_METHOD"]=="POST"){
          //obtener valores del formulario mediante POST
-         $nombre = $_POST["txtNombres"];
-         $apPaterno = $_POST["txtApPaterno"];
-         $apMaterno = $_POST["txtApMaterno"];
-         $correo = $_POST["txtCorreo"];
-         $usuario = $_POST["txtUsuario"];
-         $contrasenia =$_POST["txtContrasenia"];
-         $perfil = $_POST["cboPerfil"];
-         
-         $this->validarNombre($nombre);
-         $this->validarApPaterno($apPaterno);
+         $fecha   = $_POST["txtdate"];
+         $inicio  = $_POST["txtinicio"];
+         $fin     = $_POST["txtfin"];
+         $cupos   = $_POST["txtcupos"];
 
-         if($this->errores){
-            $data = array(
-               "contenido" => "views/personas/frmRegistrar.php",
-               "titulo"    => "Formulario de registro de usuarios",
-               "errores"   => $this->errores    
-              );
-              require_once TEMPLATE;
-         }else{
-            //arreglo asociativo de los datos enviados por POST
-            $dataPersona = [
-               "nombres" => $nombre,
-               "apPaterno" => $apPaterno,
-               "apMaterno" =>$apMaterno,
-               "correo" =>$correo,
-               "usuario" =>$usuario,
-               "contrasenia" => $this->validation->sanitizacion($contrasenia),
-               "perfil" =>$perfil
+         //$this->validarCupos($cupos);
+        // $this->validarApPaterno($apPaterno);
+
+            $dataHorario = [
+
+               "fecha" => $fecha,
+               "ho_inicio"  => $inicio,
+               "ho_fin" => $fin,
+               "cupos" => $cupos
+
             ];
-            $this->db->save($dataPersona);
 
-            $_SESSION["mensaje"] ="Datos registrados correctamente";
+            $this->medico->saveHorario($dataHorario);
 
-            $url = BASE_URL."persona";
+            $_SESSION["mensaje"] ="Nuevo horario registrados correctamente";
+
+            $url = BASE_URL."medico/horario";
             header("Location: $url");
-         }
-        
       }else{
          $data["contenido"] = ERROR_404;
          require_once TEMPLATE;
@@ -85,45 +87,72 @@ class MedicoController{
    }
 
 
-   private function validarNombre($valor){
 
-      $opciones = array(
-         "options" => array(
-            "min_range" =>3,
-            "max_range" =>10
-         )
-      );
+   public function actualizarhorario($id)
+   {
+       error_reporting(0);
 
-      if(!$this->validation->validarRequeridos($valor)){
-         $this->errores["nombre"] ="Debe ingresar un valor en nombres";
+       if ($_SERVER["REQUEST_METHOD"] == "POST") {
          
-      }else if(!$this->validation->validarLongitudes($valor,$opciones)){
-         $this->errores["nombre"] ="Valores Permitidos: [3-10]";
-      }
-      return $this->errores;
 
+           $fecha   = $_POST["txtFecha"];
+           $inicio  = $_POST["txtHoInicio"];
+           $fin     = $_POST["txtHoFin"];
+           $cupos   = $_POST["txtCupos"];
+
+                   $dataHorario = [
+                       "fecha" => $fecha,
+                       "ho_inicio"  => $inicio,
+                       "ho_fin" => $fin,
+                       "cupos" => $cupos
+                   ];
+                   $this->medico->updatehorario($id, $dataHorario);
+    
+               $_SESSION["mensaje"] = "Datos actualizados correctamente";
+
+               echo json_encode(array("statusCode" => 200));
+           }
    }
-   private function validarApPaterno($valor){
-
-      if(!$this->validation->validarRequeridos($valor)){
-         $this->errores["paterno"] ="Debe ingresar un valor en Ap. Paterno";
-      }
-      return $this->errores;
-
-   }
-
    
-   public function eliminar($id){
+   public function eliminarhorario($id){
       if($_SERVER["REQUEST_METHOD"]=="GET"){
-        // $idd = $_GET["id"];
-         $this->db->delete($id);
+         $this->medico->deleteHorario($id);
 
       }
 
       $_SESSION['mensaje'] = "Datos eliminados correctamente";
-      $url = BASE_URL."persona";
+      $url = BASE_URL."medico/horario";
       header("Location: $url");
   }
+
+  private function validarNombre($valor){
+
+   $opciones = array(
+      "options" => array(
+         "min_range" =>3,
+         "max_range" =>10
+      )
+   );
+
+   if(!$this->validation->validarRequeridos($valor)){
+      $this->errores["nombre"] ="Debe ingresar un valor en nombres";
+      
+   }else if(!$this->validation->validarLongitudes($valor,$opciones)){
+      $this->errores["nombre"] ="Valores Permitidos: [3-10]";
+   }
+   return $this->errores;
+
+}
+private function validarApPaterno($valor){
+
+   if(!$this->validation->validarRequeridos($valor)){
+      $this->errores["paterno"] ="Debe ingresar un valor en Ap. Paterno";
+   }
+   return $this->errores;
+
+}
+
+
 
 
     
