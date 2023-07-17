@@ -10,7 +10,8 @@ class VistaController{
    protected $validation;
 
    public function __construct(){
-       session_start();
+     
+
        $this->vista = new PacienteModel();
        //$this->validation = new ValController();
        //$this->errores = array();

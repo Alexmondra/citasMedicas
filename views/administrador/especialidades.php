@@ -61,7 +61,7 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                        <?php endforeach; ?>
+                                        <?php endforeach; ?> 
                                     </tbody>
                                 </table><!-- /.table -->
                             </div><!-- /.table-responsive -->
@@ -94,7 +94,7 @@
         </div><!-- /.page-inner -->
     </div><!-- /.page -->
 </div>
- 
+  
 
 <div class="modal form-modal" id="modal-especialidad" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-xs">

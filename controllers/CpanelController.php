@@ -3,7 +3,13 @@
 class CpanelController{
 
     public function __construct(){
-        #echo "Este es el controlador por defecto - CPANEL";
+        session_start();
+        if(empty($_SESSION["session"]["loggin_in"])){
+            $url= BASE_URL.'login';
+            header("Location: $url");
+            die();
+        }
+     
     }
 
     public function index(){

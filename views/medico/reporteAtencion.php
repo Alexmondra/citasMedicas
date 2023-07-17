@@ -26,28 +26,21 @@
                                     <thead class="thead-">
                                         <tr>
                                             <th> # </th>
-                                            <th> Nombre del Producto </th>
-                                            <th> Precio </th>
-                                            <th> Categoría </th>
-                                            <th> Opciones </th>
+                                            <th> NOMBRE PACIENTE </th>
+                                            <th> MOTIVO </th>
+                                            <th> HORA </th>
+                                            <th> INTERVENCIONES</th>
                                         </tr>
                                     </thead><!-- /thead -->
                                     <!-- tbody -->
                                     <tbody>
-                                        <?php $cont=0; foreach($data["productos"] as $row): $cont++;?>
+                                        <?php $cont=0; foreach($data["atenciones"] as $row): $cont++;?>
                                         <tr>
                                             <td><?php echo $cont;?></td>
-                                            <td><?php echo $row["nombre"]?></td>
-                                            <td><?php echo $row["precio"]?></td>
-                                            <td> <?php echo $row["nombreCat"]?></td>
-                                            <td>
-                                                <a href="<?php echo BASE_URL;?>producto/frmEditar/<?php  echo $row["id"]?>"
-                                                    class="btn btn-info btn-sm">editar
-                                                    <i class="fa fa-edit"></i> </a>
-                                                <a href="<?php echo BASE_URL;?>producto/eliminar/<?php echo $row["id"]?>"
-                                                    class="btn btn-dark btn-sm">eliminar
-                                                    <i class="fa fa-trash"></i></a>
-                                            </td>
+                                            <td><?php echo $row["nombre"]." " . $row["apellidoP"] . " " . $row["apellidoM"] ?></td>
+                                            <td><?php echo $row["detalle"]?></td>
+                                            <th><?php echo $row["hora"]?></th>
+                                            <td> <?php echo $row["intervenciones"]?></td>
                                         </tr>
                                         <?php endforeach?>
                                     </tbody><!-- /tbody -->

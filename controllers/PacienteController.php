@@ -10,7 +10,7 @@ class PacienteController{
    protected $validation;
 
    public function __construct(){
-       session_start();
+      session_start();
        $this->paciente = new PacienteModel();
        $this->validation = new ValController();
        $this->errores = array(); 
@@ -24,8 +24,17 @@ class PacienteController{
          "especialidad" => $this->paciente->getAllEspecialidad(),
          "medico" => $this->paciente->getAllDoctores()
          );
+
+         $data_session = [
+            "user_modulos"  => ""
+        ];
+            $_SESSION["session"] = $data_session;
+
       require_once TEMPLATE;
    }
+
+   
+
 
    public function reprogramar(){
 

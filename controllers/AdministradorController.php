@@ -10,7 +10,12 @@ class AdministradorController{
    protected $validation;
 
    public function __construct(){
-       session_start();
+    session_start();
+    if(empty($_SESSION["session"]["loggin_in"])){
+        $url= BASE_URL.'login';
+        header("Location: $url");
+        die();
+    }
        $this->administrador = new AdministradorModel();
        $this->validation = new ValController();
        $this->errores = array(); 
@@ -42,14 +47,15 @@ class AdministradorController{
              $especialidad = $_POST["txtEspeci"];
              $descripcion  = $_POST["txtDescripcion"];
              $precio  = $_POST["txtPrecio"];
+             $token =md5($_POST["txtEspeci"]);
              if ($this->errores) {
                  echo json_encode(array("statusCode" => 500, "errores" => $this->errores));
              } else {
- 
-                
                      $dataEspecialidad = [
+                       
                         "especialidad" =>$especialidad,
-                        "descripcion" => $descripcion
+                        "descripcion" => $descripcion,
+                        "token" =>$token
                         
                      ];
                      
@@ -125,4 +131,13 @@ class AdministradorController{
              require_once TEMPLATE;
          }
      }
+
+
+
+
+
+     /// controlador de perfiles 
+
+
+     
 }

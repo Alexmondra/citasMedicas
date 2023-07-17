@@ -94,7 +94,7 @@
                 <div class="col-auto">
                     <ul class="nav justify-content-end">
                         <li class="nav-item">
-                            <a href="<?php echo BASE_URL?>vista/login" class="nav-link btn btn-primary">INICIAR
+                            <a href="<?php echo BASE_URL?>login" class="nav-link btn btn-primary">INICIAR
                                 SESIÓN</a>
                         </li>
                     </ul>

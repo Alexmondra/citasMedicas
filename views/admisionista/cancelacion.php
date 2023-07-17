@@ -33,7 +33,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <img src="https://robohash.org/<?php echo $row["id"]?>" alt="Imagen" width="60"
+                                    <img src="9<?php echo $row["id"]?>" alt="Imagen" width="60"
                                         height="60">
                                 </div>
                                 <div class="col-md-9">

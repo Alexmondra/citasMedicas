@@ -43,8 +43,8 @@ class MedicoModel{
         return $this->registros;
     }
 
-    public function gethorario(){
-        $sql = " SELECT * FROM horario";
+    public function gethorario($idMedico){
+        $sql = " SELECT * FROM horario WHERE id_usuario = $idMedico";
                     
         $consulta = $this->db->query($sql); 
 
@@ -52,15 +52,15 @@ class MedicoModel{
             $this->registros[] = $row;
         }
         return $this->registros;
-
-
     }
 
-    public function getResultID($id){
-        $sql = "SELECT * FROM horario
-                WHERE id_horario = $id";
-        $consulta = $this->db->query($sql); 
-        $row =  $consulta->fetch_assoc();
+    public function getResultID($token){
+        $sql = "SELECT * FROM horario WHERE token = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("s", $token);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
         return $row;
     }
 
@@ -72,7 +72,7 @@ class MedicoModel{
                                     hora_inicio = '" . $data["ho_inicio"] . "', 
                                     hora_fin = '" . $data["ho_fin"] . "',
                                     cupos= '" . $data["cupos"] . "'
-                                    WHERE id_horario = $id ";
+                                    WHERE token ='" . $id . "'";
 
         $this->db->query($sql);
     }
@@ -81,21 +81,41 @@ class MedicoModel{
         $this->db->query($sql);
     }
     
-    public function saveHorario($data)
+    public function saveHorario($data,$userID)
     {
         $sql = " INSERT INTO horario(id_usuario,
                             fecha,
                             hora_inicio,
                             hora_fin,
-                            cupos)
-                        VALUES('1',
+                            cupos,
+                            token)
+                        VALUES('" . $userID . "',
                                '". $data["fecha"] ."',
                                '". $data["ho_inicio"] ."',
                                '". $data["ho_fin"] ."',
-                               '". $data["cupos"] . "')";
+                               '". $data["cupos"] . "',
+                               '". $data["token"] . "')";
 
 
-        $this->db->query($sql);
+        $this->db->query($sql); 
+    }
+
+    public function getAtencionesMedico(){
+        $sql = " SELECT persona.nombre as nombre , persona.apellido_p as apellidoP , 
+                        persona.apellido_m as apellidoM , cita.detalle as detalle,
+                        cita.intervenciones as intervenciones, atencion_cita.entrada as hora
+                from atencion_cita inner join  cita on atencion_cita.id_cita = cita.id_cita 
+                    inner join paciente on cita.id_paciente = paciente.id_paciente
+                    inner join persona on paciente.id_persona = persona.id_persona
+                    WHERE atencion_cita.salida IS NOT NULL";
+                    
+        $consulta = $this->db->query($sql); 
+
+        while($row = $consulta->fetch_assoc()){
+            $this->registros[] = $row;
+        } 
+        return $this->registros;
+
     }
 
 }

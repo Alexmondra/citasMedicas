@@ -25,7 +25,7 @@
 
             <div class="page-section">
 
-                <form action ="<?php echo BASE_URL;?>medico/registrarNuevo" method="POST" class="row gx-3 gy-2 align-items-center" id="form-nuevo" style="display: none;">
+                <form action="<?php echo BASE_URL;?>medico/registrarNuevo/<?php echo $_SESSION["session"]["user_id"];?>"method="POST" class="row gx-3 gy-2 align-items-center" id="form-nuevo" style="display: none;">
                     <div class="col-sm-3">
                         <label class="visually-hidden" for="specificSizeSelect">fecha</label>
                         <input type="date" class="form-control" id="txtdate" name="txtdate">
@@ -87,7 +87,7 @@
                                                 <button type="button" class="btn btn-sm btn-icon btn-secondary"
                                                     data-toggle="modal" data-target="#modal-horario"
                                                     data-backdrop="static" data-keyboard="false"
-                                                    onclick="verHorario(<?php echo $row['id_horario']; ?>)">
+                                                    onclick="verHorario('<?php echo $row['token']; ?>')">
                                                     <i class="fa fa-pencil-alt"></i>
                                                     <span class="sr-only">Edit</span>
                                                 </button>
@@ -182,9 +182,9 @@ $(document).ready(function() {
 });
 
 
-function verHorario(id) {
+function verHorario(token) {
     $.ajax({
-        url: "<?php echo BASE_URL ?>medico/verhorario/" + id,
+        url: "<?php echo BASE_URL ?>medico/verhorario/" + token,
         type: "GET",
         success: function(response) {
             var jsonData = JSON.parse(response);
@@ -194,16 +194,16 @@ function verHorario(id) {
             $("#txtHoFin").val(jsonData.data.hora_fin);
             $("#txtCupos").val(jsonData.data.cupos);
 
-            $("#btnRegistrar").attr("onclick", "actualizarDatos('" + jsonData.data.id_horario + "')");
+            $("#btnRegistrar").attr("onclick", "actualizarDatos('" + jsonData.data.token + "')");
         }
 
     });
 }
 
-function actualizarDatos(id) {
-    console.log("hola");
+function actualizarDatos(token) {
+    console.log(token);
     $.ajax({
-        url: "<?php echo BASE_URL; ?>medico/actualizarhorario/" + id,
+        url: "<?php echo BASE_URL; ?>medico/actualizarhorario/" + token,
         type: "POST",
         data: $("#formModulos").serialize(),
         success: function(response) {

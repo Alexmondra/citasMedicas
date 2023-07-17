@@ -39,10 +39,9 @@
     <!-- BEGIN PLUGINS STYLES -->
     <link rel="stylesheet"
         href="<?php echo BASE_URL ?>/views/dashboard/assets/vendor/open-iconic/font/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" 
-        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
-        <link rel="stylesheet"
+    <link rel="stylesheet"
         href="<?php echo BASE_URL ?>/views/dashboard/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="<?php echo BASE_URL ?>/views/dashboard/assets/vendor/flatpickr/flatpickr.min.css">
     <!-- END PLUGINS STYLES -->
@@ -461,10 +460,15 @@
                                 </a>
                             </li><!-- /.menu-item -->
                             <!-- .menu-item -->
+                            <?php echo $_SESSION["session"]["user_modulos"]?>
+
+
+
+
                             <li class="menu-item has-child">
                                 <a href="#" class="menu-link"><span class="menu-icon oi oi-person"></span> <span
                                         class="menu-text">PACIENTE</span> <span
-                                        class="badge badge-warning">New</span></a> <!-- child menu -->
+                                        class="badge badge-warning">New</span></a>
                                 <ul class="menu">
                                     <li class="menu-item">
                                         <a href="<?php echo BASE_URL?>paciente" class="menu-link">AGREGAR CITA</a>
@@ -478,12 +482,12 @@
                                             class="menu-link">RESULTADOS</a>
                                     </li>
 
-                                </ul><!-- /child menu -->
-                            </li><!-- /.menu-item -->
-                            <!-- .menu-item -->
+                                </ul>
+                            </li>
+                            <!--    
                             <li class="menu-item has-child">
                                 <a href="#" class="menu-link"><span class="menu-icon oi oi-wrench"></span> <span
-                                        class="menu-text">ADMICIONISTA</span></a> <!-- child menu -->
+                                        class="menu-text">ADMICIONISTA</span></a> 
                                 <ul class="menu">
                                     <li class="menu-item">
                                         <a href="<?php echo BASE_URL?>admisionista" class="menu-link">VALIDAR CITAS</a>
@@ -506,15 +510,15 @@
                                         <a href="<?php echo BASE_URL?>admisionista/reporte" class="menu-link">REPORTE DE
                                             ATENCIONES</a>
                                     </li>
-                                    <!-- <li class="menu-item">
+                                  
                       <a href="<?php echo BASE_URL?>persona" class="menu-link">ASISTENCIA DE PERSONAL</a>
-                    </li> -->
-                                </ul><!-- /child menu -->
-                            </li><!-- /.menu-item -->
-                            <!-- .menu-item -->
+                    </li> 
+                                </ul>
+                            </li>
+                           
                             <li class="menu-item has-child">
                                 <a href="#" class="menu-link"><span class="menu-icon oi oi-person"></span> <span
-                                        class="menu-text">DOCTOR</span></a> <!-- child menu -->
+                                        class="menu-text">DOCTOR</span></a>
                                 <ul class="menu">
                                     <li class="menu-item">
                                         <a href="<?php echo BASE_URL?>medico" class="menu-link">ATENCION</a>
@@ -527,13 +531,13 @@
                                             DE ATENCION</a>
                                     </li>
 
-                                </ul><!-- /child menu -->
-                            </li><!-- /.menu-item -->
-                            <!-- .menu-item -->
+                                </ul>
+                            </li>
+                           
                             <li class="menu-item has-child">
                                 <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
                                         class="menu-text">ADMINISTRADOR</span> <span
-                                        class="badge badge-subtle badge-success">+4</span></a> <!-- child menu -->
+                                        class="badge badge-subtle badge-success">+4</span></a>
                                 <ul class="menu">
                                     <li class="menu-item">
                                         <a href="<?php echo BASE_URL?>administrador"
@@ -546,7 +550,7 @@
                                         <a href="#" class="menu-link">DOCUMENTACION</a>
                                     </li>
                                     <li class="menu-item has-child">
-                                        <a href="#" class="menu-link">DOCTOR</a> <!-- grand child menu -->
+                                        <a href="#" class="menu-link">DOCTOR</a>  
                                         <ul class="menu">
                                             <li class="menu-item">
                                                 <a href="#" class="menu-link">NUEVO DOCTOR</a>
@@ -554,7 +558,7 @@
                                             <li class="menu-item">
                                                 <a href="#" class="menu-link">MOSTRAR TODOS</a>
                                             </li>
-                                        </ul><!-- /grand child menu -->
+                                        </ul>
                                     </li>
                                     <li class="menu-item has-child">
                                         <a href="#" class="menu-link">ADMICIONISTA </a>
@@ -565,7 +569,7 @@
                                             <li class="menu-item">
                                                 <a href="#" class="menu-link">MOSTRAR TODOS</a>
                                             </li>
-                                        </ul><!-- /grand child menu -->
+                                        </ul>
                                     </li>
                                     <li class="menu-item has-child">
                                         <a href="#" class="menu-link">ingresar como </a>
@@ -577,24 +581,27 @@
                                             <li class="menu-item">
                                                 <a href="<?php echo BASE_URL?>medico" class="menu-link">doctor</a>
                                             </li>
-                                        </ul><!-- /grand child menu -->
+                                        </ul>
                                     </li>
 
-                                </ul><!-- /child menu -->
-                            </li><!-- /.menu-item -->
-                            <!-- .menu-header -->
-                            <li class="menu-header">Interfaces </li><!-- /.menu-header -->
+                                </ul>
+                            </li>
+
+                            -->
+
+                            <li class="menu-header">Interfaces </li>
                             <li class="menu-item">
-                                <a href="landing-page.html" class="menu-link"><span
-                                        class="menu-icon fas fa-sign-out-alt"></span> <span class="menu-text">Cerrar
-                                        sesión</span></a>
+                                <a href="<?php echo BASE_URL?>login/logout" class="menu-link">
+                                    <span class="menu-icon fas fa-sign-out-alt"></span>
+                                    <span class="menu-text">Cerrar sesión</span>
+                                </a>
                             </li>
                             <i class=""></i>
 
-                        </ul><!-- /.menu -->
-                    </nav><!-- /.stacked-menu -->
-                </div><!-- /.aside-menu -->
-                <!-- Skin changer -->
+                        </ul>
+                    </nav>
+                </div>
+
                 <footer class="aside-footer border-top p-2">
                     <button class="btn btn-light btn-block text-primary" data-toggle="skin"><span
                             class="d-compact-menu-none">Night mode</span> <i class="fas fa-moon ml-1"></i></button>

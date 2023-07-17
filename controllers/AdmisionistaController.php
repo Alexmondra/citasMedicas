@@ -10,7 +10,12 @@ class AdmisionistaController{
    protected $validation;
 
    public function __construct(){
-       session_start();
+      session_start();
+      if(empty($_SESSION["session"]["loggin_in"])){
+          $url= BASE_URL.'login';
+          header("Location: $url");
+          die();
+      }
        $this->admisionista = new AdmisionistaModel();
        $this->validation = new ValController();
        $this->errores = array(); 

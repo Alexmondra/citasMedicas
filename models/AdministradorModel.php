@@ -26,9 +26,11 @@ class AdministradorModel{
     {
         $sql = "INSERT INTO especialidad(nombre, 
                                       descripcion,
-                                      estado) 
+                                      estado,
+                                      token) 
                 VALUES ('" . $data["especialidad"] . "', 
-                        '" . $data["descripcion"] . "','1')";
+                        '" . $data["descripcion"] . "', '1' , 
+                        '" . $data["token"] ."')";
         $this->db->query($sql);
     }
 
@@ -52,6 +54,9 @@ class AdministradorModel{
     }
 
 
+    //// modelo de perfiles 
+
+    
 }
 
 ?>
