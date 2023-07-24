@@ -20,7 +20,7 @@
                     </div>
 
 
-                    <div class="ml-auto">
+                    <div class="ml-auto"> 
                         <!-- .dropdown -->
                         <div class="dropdown">
                             <input type="text" class="form-control" id="buscar" placeholder="Buscar">
@@ -52,14 +52,14 @@
                                     </thead><!-- /thead -->
                                     <!-- tbody -->
                                     <tbody id="tablaDat">
-                                        <?php $cont=0; foreach($data["pagos"] as $row): $cont++;?>
+                                        <?php $cont=0; foreach($data["citaPendientes"] as $row): $cont++;?>
                                         <tr>
                                             <td><?php echo $cont;?></td>
                                             <td><?php echo $row["nombre"]?></td>
                                             <td><?php echo $row["sexo"]?></td>
                                             <td><?php echo $row["dni"]?></td>
                                             <td><?php echo $row["fecha"]?></td>
-                                            <td><?php echo $row["precio"]?></td>
+                                            <td><?php echo $row["precio"]?></td> 
                                             <td>
                                                 <button type="button" class="btn btn-flat btn-success"
                                                     data-toggle="modal" data-target="#modal-pagos"
@@ -173,7 +173,7 @@ function showControls() {
 }
 
 
-function registrarDatos(id) {
+function registrarDatos(id){
     $.ajax({
         url: "<?php echo BASE_URL; ?>admicionista/registrarModulos",
         type: "POST",

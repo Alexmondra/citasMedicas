@@ -14,12 +14,15 @@ class LoginModel
     
     public function getAllResultados($user, $pass){
         
-        $sql = "SELECT * FROM usuario
-                WHERE usuario='".$user."' AND clave='".$pass."'";
+        $sql = "SELECT * FROM usuario INNER JOIN persona ON persona.id_persona = usuario.id_persona
+                                      INNER JOIN perfiles ON perfiles.id_perfil = usuario.id_perfil
+                WHERE usuario.usuario='".$user."' AND usuario.clave='".$pass."'";
         $consulta = $this->db->query($sql);
         $row = $consulta->fetch_assoc();
         return $row;
     }
+
+
     /*
     public function getAllResultados($user, $pass)
     {

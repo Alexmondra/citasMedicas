@@ -11,7 +11,7 @@ class PacienteModel{
     }
     
     public function getAllEspecialidad(){
-        $sql = "SELECT * FROM especialidad";
+        $sql = "SELECT * FROM especialidad WHERE estado = 1";
         $consulta = $this->db->query($sql);
         $registros = array();
         while ($row = $consulta->fetch_assoc()) {

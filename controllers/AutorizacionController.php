@@ -209,7 +209,7 @@ class AutorizacionController{
     }
 
     public function registrarPerfiles()
-    {
+    { 
         error_reporting(0);
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {

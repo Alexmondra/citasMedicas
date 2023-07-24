@@ -41,21 +41,35 @@ class AdministradorController{
         require_once TEMPLATE;
      }  
      
-     public function registrar(){
+     public function registrarEspe(){
          if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $nomArchivo = $_FILES["file"]["name"]; //obtener el nombre del archivo
+            $nomTemporal = $_FILES["file"]["tmp_name"]; //nombre temporal para subir el archivo
+            $fileSize = $_FILES["file"]["size"]; //obtener el tamño del archivo
+            $extension = pathinfo($nomArchivo, PATHINFO_EXTENSION); //obtener la extensión del archivo
+            $nomArchivo = substr(md5(time()), 0, 10) . "." . $extension;
+
+            
  
              $especialidad = $_POST["txtEspeci"];
              $descripcion  = $_POST["txtDescripcion"];
              $precio  = $_POST["txtPrecio"];
-             $token =md5($_POST["txtEspeci"]);
+             $token = md5($_POST["txtEspeci"]);
+
+             $this->validarImagen($extension, $fileSize);
+
              if ($this->errores) {
                  echo json_encode(array("statusCode" => 500, "errores" => $this->errores));
              } else {
+                  move_uploaded_file($nomTemporal, "public/especialidades/" . $nomArchivo);
+
                      $dataEspecialidad = [
-                       
+                    
                         "especialidad" =>$especialidad,
                         "descripcion" => $descripcion,
-                        "token" =>$token
+                        "token" =>$token,
+                        "imagen" => $nomArchivo
                         
                      ];
                      
@@ -76,68 +90,53 @@ class AdministradorController{
          }
      }
  
-     public function ver($id)
-     {
-         $data = $this->administrador->getResultID($id);
+     public function verEspecialidad($id){
+         $data = $this->administrador->getResultIdEspeci($id);
          echo json_encode(array("data" => $data));
-         //die(json_encode($data));
      }
- 
-     public function actualizarModulos($id)
+
+     public function ActivarEspecialidad($id){
+        if($_SERVER["REQUEST_METHOD"]=="GET"){
+           $this->administrador->activarEs($id);
+           $_SESSION['mensaje'] = "especialidad en servicio";
+           $url = BASE_URL."administrador";
+           header("Location: $url");
+         }
+ }
+
+     public function desactivarEspecialidad($id){
+            if($_SERVER["REQUEST_METHOD"]=="GET"){
+               $this->administrador->desactivarEs($id);
+               $_SESSION['mensaje'] = "especialidad fuera de servicio";
+               $url = BASE_URL."administrador";
+               header("Location: $url");
+             }
+     }
+
+
+     
+     
+
+
+
+
+
+
+
+
+     // validadciones 
+
+     private function validarImagen($extension, $img)
      {
-         error_reporting(0);
+         $extensionesValidas = array("jpg", "png", "jpeg", "gif");
  
-         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+         $max_file_size = "5000000"; // convertido a MB representaria 50MB, tener en cuenta que un 1MB = 1024KB
  
-             $tipoOpcion = $_POST["cboOpcion"];
-             $icon       = $_POST["txtIcon"];
-             $cboModulo  = $_POST["cboModulo"];
-             $url        = $_POST["txtUrl"];
-             $descripcion = $_POST["txtDescripcion"];
- 
-             if ($tipoOpcion == 1) {
-                 $this->validarIcon($icon);
-                 $this->validarDescripcion($descripcion);
-             } else {
-                 $this->validarDescripcion($descripcion);
-                 $this->validarURL($url);
-             }
- 
-             if ($this->errores) {
-                 echo json_encode(array("statusCode" => 500, "errores" => $this->errores));
-             } else {
- 
-                 if ($tipoOpcion == 1) {
-                     $dataModulo = [
-                         "descripcion" => $descripcion,
-                         "icon"        => $icon,
-                     ];
-                     $this->db->updateModulo($id, $dataModulo);
-                 } else {
-                     $dataSubModulo = [
-                         "descripcion" => $descripcion,
-                         "url"         => $url,
-                         "submodulo"   => $cboModulo
-                     ];
-                     $this->db->updateSubModulo($id, $dataSubModulo);
-                 }
- 
-                 $_SESSION["mensaje"] = "Datos actualizados correctamente";
- 
-                 echo json_encode(array("statusCode" => 200));
-             }
-         } else {
-             $data["contenido"] = ERROR_404;
-             require_once TEMPLATE;
+         if (!in_array($extension, $extensionesValidas)) {
+             $this->errores["imagen"] = "Extensión de archivo invalido o no se ha subido ningun valor";
+         } else if ($img > $max_file_size) {
+             $this->errores["imagen"] = "La imagen debe tener un tamaño inferior a 25MB";
          }
      }
-
-
-
-
-
-     /// controlador de perfiles 
-
-
      
 }

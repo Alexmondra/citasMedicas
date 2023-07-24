@@ -44,10 +44,11 @@ class  LoginController
                                 $this->db->actualizarIntentosFallidos($usuario, 0);
                                     $data_session = [
                                         "loggin_in"     =>1,
-                                        // "fullName"      =>$consulta["nombres"]." ".$consulta["apPaterno"]." ".$consulta["apMaterno"]." ",
+                                        "fullName"      =>$consulta["nombre"]." ".$consulta["apellido_p"]." ".$consulta["apellido_m"]." ",
                                         "user_id"       =>$consulta["id_usuario"],
                                         "user_profile"  =>$consulta["perfil"],
                                         "user_IDprofile"=>$consulta["id_perfil"],
+                                        "img" =>$consulta["img"],
                                         "user_modulos"  => $this->menu($consulta["id_perfil"])
                                     ];
                                         $_SESSION["session"] = $data_session;

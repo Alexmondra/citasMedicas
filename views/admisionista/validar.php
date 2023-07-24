@@ -60,8 +60,10 @@
                                     <!-- tbody -->
                                     <tbody id="tablaDat">
 
-                                        <?php $cont=0; foreach($data["cita"] as $row): $cont++;?>
+                                        <?php $cont=0; foreach($data["cita"] as $row): $cont++; ?>
+
                                         <tr>
+
                                             <td><?php echo $cont;?></td>
                                             <td><?php echo $row["dni"]?></td>
                                             <td><?php echo $row["nombre_paciente"]?></td>
@@ -70,24 +72,27 @@
                                             <td><?php echo $row["estado"]?></td>
                                             <td>
                                                 <?php if($row["estado"] == "En atencion"){?>
-                                                <a href="<?php echo BASE_URL;?>admisionista/inicio/<?php echo $row["id"]?>"
+                                                <a href="<?php echo BASE_URL;?>admisionista/inicio/<?php echo $row["id"]?>/<?php echo $_SESSION["session"]["user_id"]?>"
                                                     class="btn btn-info btn-sm disabled" role="button"
                                                     aria-disabled="true">
                                                     iniciar <i class="fa fa-play"></i>
                                                 </a>
                                                 <?php }else{?>
-                                                <a href="<?php echo BASE_URL;?>admisionista/inicio/<?php echo $row["id"]?>"
-                                                    class="btn btn-info btn-sm">iniciar
-                                                    <i class="fa fa-play"></i>
-                                                </a>
+                                                <form action="<?php echo BASE_URL; ?>admisionista/inicio" method="post">
+                                                    <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
+                                                    <input type="hidden" name="user_id"
+                                                        value="<?php echo $_SESSION["session"]["user_id"]; ?>">
+                                                    <button type="submit" class="btn btn-info btn-sm">iniciar <i
+                                                            class="fa fa-play"></i></button>
+                                                </form>
                                                 <?php  } ?>
 
                                             </td>
                                             <td>
-                                                <?php if($row["entrada"] == NULL && $row["entrada"] == ""){?>
+                                                <?php if($row["estado"] != "En atencion"){?>
                                                 <a href="<?php echo BASE_URL;?>admisionista/fin/<?php  echo $row["id"]?>"
                                                     class="btn btn-danger btn-sm disabled" role="button"
-                                                    aria-disabled="true">terminar
+                                                    aria-disabled="true">terminar 
                                                     <i class="fa fa-play"></i>
                                                 </a>
                                                 <?php }else{?>

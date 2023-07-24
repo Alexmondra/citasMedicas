@@ -12,7 +12,8 @@ class AdministradorModel{
 
     public function getAllEspecialidades(){
         $sql = "SELECT especialidad.nombre as nombre, especialidad.descripcion as descripcion,
-        precios.precio, especialidad.id_especialidad as id_especialidad , especialidad.estado as estado
+        precios.precio , especialidad.estado as estado ,
+        especialidad.id_especialidad as id 
          FROM especialidad INNER JOIN precios on especialidad.id_especialidad = precios.id_especialidad";
         $consulta = $this->db->query($sql);
         $registros = array();
@@ -22,15 +23,16 @@ class AdministradorModel{
         return $registros;
     }
 
-    public function saveEspecialidad($data)
-    {
+    public function saveEspecialidad($data) {
         $sql = "INSERT INTO especialidad(nombre, 
                                       descripcion,
                                       estado,
-                                      token) 
+                                      token,
+                                      imagen) 
                 VALUES ('" . $data["especialidad"] . "', 
                         '" . $data["descripcion"] . "', '1' , 
-                        '" . $data["token"] ."')";
+                        '" . $data["token"] ."',
+                        '" . $data["imagen"] ."')";
         $this->db->query($sql);
     }
 
@@ -43,7 +45,7 @@ class AdministradorModel{
         $this->db->query($sql);
     }
 
-    public function getResultID($id){
+    public function getResultIdEspeci($id){
         $sql = "SELECT *
 		        FROM especialidad
                 INNER JOIN precios ON especialidad.id_especialidad = precios.id_especialidad
@@ -53,8 +55,22 @@ class AdministradorModel{
         return $row;
     }
 
+    public function activarEs($id){ 
+        $sql1 ="UPDATE especialidad SET estado = 1 WHERE id_especialidad = '".$id."'";
 
-    //// modelo de perfiles 
+        $this->db->query($sql1); 
+
+    }
+    public function desactivarEs($id){ 
+        $sql1 ="UPDATE especialidad SET estado = 0 WHERE id_especialidad = '".$id."'";
+
+        $this->db->query($sql1); 
+
+    }
+    
+
+
+    
 
     
 }

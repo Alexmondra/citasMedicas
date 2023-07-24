@@ -47,7 +47,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <img src="https://robohash.org/1" alt="Imagen" width="60" height="60">
+                                    <img src="<?php echo BASE_URL?>/public/especialidades/<?php echo $row['imagen']; ?>" alt="Imagen"
+                                        width="60" height="60">
                                 </div>
                                 <h3 class="name"><span class="name-value"><?php echo $row['nombre']; ?></span>
                                 </h3>

@@ -48,20 +48,29 @@
                                             <td><?php echo $row["descripcion"] ?></td>
                                             <td><?php echo $row["precio"] ?></td>
                                             <td>
-                                                <button class="activar btn btn-warning" disabled=""><i
-                                                        class="fa fa-check"></i></button>
-                                                <button class=" btn btn-danger"><i
-                                                        class="fa fa-times-circle"></i></button>
+                                                <?php if ($row["estado"] == 0){?>
+                                                <a href="<?php echo BASE_URL ?>administrador/ActivarEspecialidad/<?php echo $row["id"]?>"
+                                                    class="activar btn btn-warning" role="button" disabled="">
+                                                    <i class="fa fa-check"></i>
+                                                    <span class="sr-only">ACTIVAR</span>
+                                                </a>
+                                                <?php }else { ?>
+                                                <a href="<?php echo BASE_URL ?>administrador/desactivarEspecialidad/<?php echo $row["id"]?>"
+                                                    class="btn btn-danger">
+                                                    <i class="fa fa-times-circle"></i>
+                                                    <span class="sr-only">DESACTIVAR</span>
+                                                </a>
+                                                <?php } ?>
                                                 <button type="button" class="btn btn-sm btn-icon btn-secondary"
                                                     data-toggle="modal" data-target="#modal-especialidad"
                                                     data-backdrop="static" data-keyboard="false"
-                                                    onclick="verEspecialdiad(<?php echo $row['id_especialidad']; ?>)">
+                                                    onclick="verEspecialdiad(<?php echo $row['id']; ?>)">
                                                     <i class="fa fa-pencil-alt"></i>
                                                     <span class="sr-only">Edit</span>
                                                 </button>
                                             </td>
                                         </tr>
-                                        <?php endforeach; ?> 
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table><!-- /.table -->
                             </div><!-- /.table-responsive -->
@@ -75,12 +84,26 @@
                                             <p><?php echo $row["descripcion"] ?></p>
                                             <p>Precio: <?php echo $row["precio"] ?></p>
                                             <div class="item-options">
-                                                <button class="activar btn btn-warning" disabled=""><i
-                                                        class="fa fa-check"></i></button>
-                                                <button class="btn btn-danger"><i
-                                                        class="fa fa-times-circle"></i></button>
-                                                <button class="btn btn-sm btn-icon btn-secondary"><i
-                                                        class="fa fa-pencil-alt"></i></button>
+                                                <?php if ($row["estado"] == 0){?>
+                                                <a href="<?php echo BASE_URL ?>administrador/ActivarEspecialidad/<?php echo $row["id"]?>"
+                                                    class="activar btn btn-warning" role="button" disabled="">
+                                                    <i class="fa fa-check"></i>
+                                                    <span class="sr-only">ACTIVAR</span>
+                                                </a>
+                                                <?php }else { ?>
+                                                <a href="<?php echo BASE_URL ?>administrador/desactivarEspecialidad/<?php echo $row["id"]?>"
+                                                    class="btn btn-danger">
+                                                    <i class="fa fa-times-circle"></i>
+                                                    <span class="sr-only">DESACTIVAR</span>
+                                                </a>
+                                                <?php } ?>
+                                                <button type="button" class="btn btn-sm btn-icon btn-secondary"
+                                                    data-toggle="modal" data-target="#modal-especialidad"
+                                                    data-backdrop="static" data-keyboard="false"
+                                                    onclick="verEspecialdiad(<?php echo $row['id']; ?>)">
+                                                    <i class="fa fa-pencil-alt"></i>
+                                                    <span class="sr-only">Edit</span>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -94,7 +117,7 @@
         </div><!-- /.page-inner -->
     </div><!-- /.page -->
 </div>
-  
+
 
 <div class="modal form-modal" id="modal-especialidad" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-xs">
@@ -125,6 +148,18 @@
                             <input type="text" name="txtPrecio" id="txtPrecio" class="form-control">
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label for="colFormLabel" class="col-sm-4 col-form-label text-right">Imagen:</label>
+                        <input type="hidden" id="txtImg" name="txtImg">
+                        <div class="col-sm-7">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="file" name="file">
+                                <label class="custom-file-label" for="customFile" id="customFile"></label>
+                            </div>
+                            <small class="text-danger "><b id="errFile"></b></small>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <a href="" class="btn btn-width btn-secondary btn-flat">CANCELAR</a>
@@ -140,34 +175,47 @@
 </div>
 
 <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const toggleButton = document.getElementById("toggle-display");
+    const tableView = document.getElementById("table-view");
+    const gridView = document.getElementById("grid-view");
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const toggleButton = document.getElementById("toggle-display");
-        const tableView = document.getElementById("table-view");
-        const gridView = document.getElementById("grid-view");
-
-        toggleButton.addEventListener("click", function () {
-            if (tableView.style.display === "none") {
-                tableView.style.display = "block";
-                gridView.style.display = "none";
-            } else {
-                tableView.style.display = "none";
-                gridView.style.display = "block";
-            }
-        });
+    toggleButton.addEventListener("click", function() {
+        if (tableView.style.display === "none") {
+            tableView.style.display = "block";
+            gridView.style.display = "none";
+        } else {
+            tableView.style.display = "none";
+            gridView.style.display = "block";
+        }
     });
+});
 
 
 function registrataDatos() {
     $.ajax({
-        url: "<?php echo BASE_URL; ?>administrador/registrar",
+        url: "<?php echo BASE_URL; ?>administrador/registrarEspe",
         type: "POST",
-        data: $("#formModulos").serialize(),
+        //data: $("#formModulos").serialize(),
+        data: new FormData(document.getElementById('formModulos')),
+        enctype: 'multipart/form-data',
+        contentType: false,
+        cache: false,
+        processData: false,
         success: function(response) {
             var jsonData = JSON.parse(response);
+
             if (jsonData.statusCode == 200) {
                 $("#modal-especialidad").modal('hide');
                 window.location.href = '<?php echo BASE_URL ?>administrador';
+            } else if (jsonData.statusCode == 500) {
+                $("#modal-especialidad").modal('show');
+
+                if (jsonData.errores.imagen) {
+                    $("#errFile").text(jsonData.errores.imagen);
+                } else {
+                    $("#errFile").text("");
+                }
             }
 
         }
@@ -178,11 +226,11 @@ function registrataDatos() {
 function verEspecialdiad(id) {
     $("#title").text("Actualizar Especialdiad");
     $.ajax({
-        url: "<?php echo BASE_URL ?>administrador/ver/" + id,
+        url: "<?php echo BASE_URL ?>administrador/verEspecialidad/" + id,
         type: "GET",
         success: function(response) {
             var jsonData = JSON.parse(response);
-            
+
             $("#txtEspeci").val(jsonData.data.nombre);
             $("#txtDescripcion").val(jsonData.data.descripcion);
             $("#txtPrecio").val(jsonData.data.precio);

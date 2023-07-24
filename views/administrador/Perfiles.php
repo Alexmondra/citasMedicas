@@ -173,6 +173,7 @@
 
                 $.each(jsonData.registros, function(idx, val) {
                     cont++;
+                    
                     if (val.estado == 1) {
                         estado = "Activo";
                     } else {
@@ -203,7 +204,7 @@
         });
     }
 
-    function registrarDatos() {
+    function registrarDatos() { 
         $.ajax({
             url: "<?php echo BASE_URL; ?>autorizacion/registrarPerfiles",
             type: "POST",

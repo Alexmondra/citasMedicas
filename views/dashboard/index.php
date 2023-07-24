@@ -395,24 +395,24 @@
                             </li><!-- /.nav-item -->
                         </ul><!-- /.nav -->
                         <!-- .btn-account -->
+
                         <div class="dropdown d-none d-md-flex">
                             <button class="btn-account" type="button" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false"><span class="user-avatar user-avatar-md"><img
-                                        src="<?php echo BASE_URL?>public/img/doctor_login.jpg" alt=""></span> <span
-                                    class="account-summary pr-lg-4 d-none d-lg-block"><span class="account-name">Beni
-                                        Arisandi</span> <span class="account-description">Marketing
-                                        Manager</span></span></button> <!-- .dropdown-menu -->
+                                        src="<?php echo BASE_URL?>public/personas/<?php echo $_SESSION["session"]["img"]?>" alt="Imagen"></span> <span
+                                    class="account-summary pr-lg-4 d-none d-lg-block"><span
+                                        class="account-name"><?php echo $_SESSION["session"]["fullName"]?></span> <span
+                                        class="account-description"><?php echo $_SESSION["session"]["user_profile"]?></span></span></button>
+                            <!-- .dropdown-menu -->
                             <div class="dropdown-menu">
                                 <div class="dropdown-arrow d-lg-none" x-arrow=""></div>
                                 <div class="dropdown-arrow ml-3 d-none d-lg-block"></div>
-                                <h6 class="dropdown-header d-none d-md-block d-lg-none"> Beni Arisandi </h6><a
-                                    class="dropdown-item" href="user-profile.html"><span
-                                        class="dropdown-icon oi oi-person"></span> Profile</a> <a class="dropdown-item"
-                                    href="auth-signin-v1.html"><span class="dropdown-icon oi oi-account-logout"></span>
-                                    Logout</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Help Center</a> <a
-                                    class="dropdown-item" href="#">Ask Forum</a> <a class="dropdown-item"
-                                    href="#">Keyboard Shortcuts</a>
+                                <a class="dropdown-item" href="user-profile.html"><span
+                                        class="dropdown-icon oi oi-person"></span> Profile
+                                </a> <a class="dropdown-item" href="<?php echo BASE_URL?>login/logout"><span
+                                        class="dropdown-icon oi oi-account-logout"></span>
+                                    Logout
+                                </a>
                             </div><!-- /.dropdown-menu -->
                         </div><!-- /.btn-account -->
                     </div><!-- /.top-bar-item -->
@@ -447,6 +447,7 @@
                     </div><!-- /.dropdown-aside -->
                 </header><!-- /.aside-header -->
                 <!-- .aside-menu -->
+               
                 <div class="aside-menu overflow-hidden">
                     <!-- .stacked-menu -->
                     <nav id="stacked-menu" class="stacked-menu">
@@ -462,9 +463,7 @@
                             <!-- .menu-item -->
                             <?php echo $_SESSION["session"]["user_modulos"]?>
 
-
-
-
+                         
                             <li class="menu-item has-child">
                                 <a href="#" class="menu-link"><span class="menu-icon oi oi-person"></span> <span
                                         class="menu-text">PACIENTE</span> <span
@@ -484,110 +483,7 @@
 
                                 </ul>
                             </li>
-                            <!--    
-                            <li class="menu-item has-child">
-                                <a href="#" class="menu-link"><span class="menu-icon oi oi-wrench"></span> <span
-                                        class="menu-text">ADMICIONISTA</span></a> 
-                                <ul class="menu">
-                                    <li class="menu-item">
-                                        <a href="<?php echo BASE_URL?>admisionista" class="menu-link">VALIDAR CITAS</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="<?php echo BASE_URL?>paciente" class="menu-link">REGISTRAR CITA</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="<?php echo BASE_URL?>admisionista/pagos" class="menu-link">PAGOS</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="<?php echo BASE_URL?>admisionista/cancelacion"
-                                            class="menu-link">CANCELACION</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="<?php echo BASE_URL?>admisionista/reprogramar"
-                                            class="menu-link">REPROGRAMAR</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="<?php echo BASE_URL?>admisionista/reporte" class="menu-link">REPORTE DE
-                                            ATENCIONES</a>
-                                    </li>
-                                  
-                      <a href="<?php echo BASE_URL?>persona" class="menu-link">ASISTENCIA DE PERSONAL</a>
-                    </li> 
-                                </ul>
-                            </li>
-                           
-                            <li class="menu-item has-child">
-                                <a href="#" class="menu-link"><span class="menu-icon oi oi-person"></span> <span
-                                        class="menu-text">DOCTOR</span></a>
-                                <ul class="menu">
-                                    <li class="menu-item">
-                                        <a href="<?php echo BASE_URL?>medico" class="menu-link">ATENCION</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="<?php echo BASE_URL?>medico/horario" class="menu-link">ELECCION DE HORARIO</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="<?php echo BASE_URL?>medico/reporteAtencion" class="menu-link">REPORTE
-                                            DE ATENCION</a>
-                                    </li>
-
-                                </ul>
-                            </li>
-                           
-                            <li class="menu-item has-child">
-                                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
-                                        class="menu-text">ADMINISTRADOR</span> <span
-                                        class="badge badge-subtle badge-success">+4</span></a>
-                                <ul class="menu">
-                                    <li class="menu-item">
-                                        <a href="<?php echo BASE_URL?>administrador"
-                                            class="menu-link">ESPECIALIDADES</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="#" class="menu-link">REPORTES</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="#" class="menu-link">DOCUMENTACION</a>
-                                    </li>
-                                    <li class="menu-item has-child">
-                                        <a href="#" class="menu-link">DOCTOR</a>  
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a href="#" class="menu-link">NUEVO DOCTOR</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="#" class="menu-link">MOSTRAR TODOS</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item has-child">
-                                        <a href="#" class="menu-link">ADMICIONISTA </a>
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a href="#" class="menu-link">NUEVO ADMICIONISTA</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="#" class="menu-link">MOSTRAR TODOS</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item has-child">
-                                        <a href="#" class="menu-link">ingresar como </a>
-                                        <ul class="menu">
-                                            <li class="menu-item">
-                                                <a href="<?php echo BASE_URL?>admisionista"
-                                                    class="menu-link">admicionista</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="<?php echo BASE_URL?>medico" class="menu-link">doctor</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                </ul>
-                            </li>
-
-                            -->
+                          
 
                             <li class="menu-header">Interfaces </li>
                             <li class="menu-item">

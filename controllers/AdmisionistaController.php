@@ -26,21 +26,64 @@ class AdmisionistaController{
       $data = array(
       "contenido" => "views/admisionista/validar.php",
       "titulo"    => "validar citas registradas",
-      "cita"  => $this->admisionista->getAllResults(), 
+      "cita"  => $this->admisionista->getAllResults(),  
       "doctor" => $this->admisionista->getAllDoctores()    
       );
 
       require_once TEMPLATE;
    }
 
+   public function inicio() {
+      if($_SERVER["REQUEST_METHOD"]=="POST"){
+         $id   = $_POST['id'];
+         $idUser  = $_POST['user_id'];
+
+         $this->admisionista->setInicio($id,$idUser);
+
+         $_SESSION['mensaje'] = "inicia la consulta";
+         $url = BASE_URL."admisionista";
+         header("Location: $url");
+
+      }
+  }
+  
+  
+  public function fin($id){
+   if($_SERVER["REQUEST_METHOD"]=="GET"){
+     // $idd = $_GET["id"];
+      $this->admisionista->setFin($id);
+      $_SESSION['mensaje'] = "fin de la consulta";
+      $url = BASE_URL."admisionista";
+      header("Location: $url");
+    }
+   }
+
+
     public function pagos(){
         $data = array(
          "contenido" => "views/admisionista/pagos.php",
          "titulo"    => "Registro de pagos",
-         "pagos" => $this->admisionista->getAllCitasPagos()   
-        );
+         "citaPendientes" => $this->admisionista->getAllCitasPagos() 
+
+          );
         require_once TEMPLATE;
-     }
+   }
+
+   public function inicoP(){
+      if($_SERVER["REQUEST_METHOD"]=="POST"){
+         $id   = $_POST['id'];
+         $idUser  = $_POST['user_id'];
+
+         $this->admisionista->RegistroPago($id,$idUser);
+
+         $_SESSION['mensaje'] = "inicia la consulta";
+         $url = BASE_URL."admisionista";
+         header("Location: $url");
+      }
+   }
+ 
+   
+
    public function cancelacion(){
       $data = array(
        "contenido" => "views/admisionista/cancelacion.php",
@@ -72,6 +115,16 @@ class AdmisionistaController{
    }
 
 
+
+   private function validarApPaterno($valor){
+
+      if(!$this->validation->validarRequeridos($valor)){
+         $this->errores["paterno"] ="Debe ingresar un valor en Ap. Paterno";
+      }
+      return $this->errores;
+
+   }
+
    private function validarNombre($valor){
 
       $opciones = array(
@@ -89,44 +142,5 @@ class AdmisionistaController{
       }
       return $this->errores;
 
-   }
-   private function validarApPaterno($valor){
-
-      if(!$this->validation->validarRequeridos($valor)){
-         $this->errores["paterno"] ="Debe ingresar un valor en Ap. Paterno";
-      }
-      return $this->errores;
-
-   }
-
-   
-   public function inicio($id){
-
-      
-      if($_SERVER["REQUEST_METHOD"]=="GET"){
-        // $idd = $_GET["id"];
-
-      $this->admisionista->setInicio($id);
-
-      $_SESSION['mensaje'] = "inicio de la consulta";
-      $url = BASE_URL."admisionista";
-      header("Location: $url");
-   }
-  }
-
-  public function fin($id){
-   if($_SERVER["REQUEST_METHOD"]=="GET"){
-     // $idd = $_GET["id"];
-      $this->admisionista->setFin($id);
-
-   $_SESSION['mensaje'] = "fin de la consulta";
-   $url = BASE_URL."admisionista";
-   header("Location: $url");
-    }
-   }
-
-  
-
-
-    
+   }   
 }

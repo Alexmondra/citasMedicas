@@ -385,11 +385,17 @@ CREATE TABLE IF NOT EXISTS`citas_regional`.`roles` (
     REFERENCES`citas_regional`.`perfiles` (`id_perfil`))
 ENGINE = InnoDB
 
-
-
 DEFAULT CHARACTER SET = utf8mb3;
 
+alter table especialidad add imagen varchar(50);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+
+--datos
+
+

@@ -10,20 +10,17 @@ class AdmisionistaModel{
         $this->registros = array();
     }
 
-
+ 
     public function getAllResults(){
         
         $sql = "SELECT persona_paciente.numero_documento as dni, persona_paciente.nombre as nombre_paciente, 
-                        persona_medico.nombre as nombre_medico, cita.detalle as detalle , cita.estado as estado , atencion_cita.entrada as entrada,
-                        atencion_cita.salida as salida , cita.fecha_cita as fechaCita ,atencion_cita.id_atencion as id,
-                        cita.id_cita as id_cita
-                
-                FROM atencion_cita  INNER JOIN cita on atencion_cita.id_cita = cita.id_cita
-                                    INNER JOIN paciente ON cita.id_paciente = paciente.id_paciente
+                        persona_medico.nombre as nombre_medico, cita.detalle as detalle , cita.estado as estado , 
+                       cita.fecha_cita as fechaCita,cita.id_cita as id_cita , cita.id_cita as id
+                FROM  cita  INNER JOIN paciente ON cita.id_paciente = paciente.id_paciente
                                     INNER JOIN persona AS persona_paciente ON persona_paciente.id_persona = paciente.id_persona
                                     INNER JOIN usuario ON usuario.id_usuario = cita.id_medico 
-                                    INNER JOIN persona AS persona_medico ON persona_medico.id_persona = usuario.id_persona
-                                    WHERE atencion_cita.salida IS NULL AND cita.estado_pago = 1";
+                                    INNER JOIN persona AS persona_medico ON persona_medico.id_persona = usuario.id_persona 
+                                    WHERE cita.estado = 'Pendiente' || cita.estado = 'En atencion'";  
         $consulta = $this->db->query($sql);
 
         while($row = $consulta->fetch_assoc()){
@@ -51,6 +48,7 @@ class AdmisionistaModel{
         }
         return $registros;
     }
+    
 
     public function getAllCitasPagos(){
         $sql = "SELECT persona.nombre as nombre , persona.sexo as sexo , 
@@ -65,6 +63,15 @@ class AdmisionistaModel{
         }
         return $this->registros;
     }
+
+    public function RegistroPago(){
+
+    }
+
+
+
+
+
     public function getAllCitas(){
         $sql = "SELECT persona.nombre AS nombre, persona.numero_documento AS dni, paciente.id_paciente AS id
                         FROM cita INNER JOIN paciente ON paciente.id_paciente = cita.id_paciente
@@ -110,13 +117,33 @@ class AdmisionistaModel{
     }
 
 
-    public function setInicio($id){
+    public function setInicio($id,$userID){
+        $sql = "INSERT INTO atencion_cita (id_cita, 
+                                            id_admisionista, 
+                                            fecha, 
+                                            entrada)
+                    VALUES ('" . $id . "', 
+                    '". $userID ."',
+                     CURDATE(), 
+                     CURTIME())";
+        $sql1 ="UPDATE cita SET estado = 'En atencion' WHERE id_cita = '".$id."'";
+
+
+    $this->db->query($sql); 
+    $this->db->query($sql1); 
+
+
+    }
+
+    public function setFin($id){
         $sql = "UPDATE atencion_cita AS ac
         INNER JOIN cita AS c ON ac.id_cita = c.id_cita
-        SET ac.entrada = CURRENT_TIME(),
-            c.estado = 'En atencion'
-        WHERE ac.id_atencion = '$id'";
+        SET ac.salida = CURRENT_TIME(),
+            c.estado = 'Atendido'
+        WHERE c.id_cita = '$id'";
+
         $this->db->query($sql);
+
     }
 
     public function getMedicos($id){
@@ -134,14 +161,6 @@ class AdmisionistaModel{
         }
         return $registros;
     }
-    public function setFin($id){
-        $sql = "UPDATE atencion_cita AS ac
-        INNER JOIN cita AS c ON ac.id_cita = c.id_cita
-        SET ac.salida = CURRENT_TIME(),
-            c.estado = 'Atendido'
-        WHERE ac.id_atencion = '$id'";
-        $this->db->query($sql);
 
-    }
     
 }
