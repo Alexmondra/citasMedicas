@@ -396,6 +396,8 @@
                         </ul><!-- /.nav -->
                         <!-- .btn-account -->
 
+                       <?php if (isset($_SESSION["session"]) && !empty($_SESSION["session"]["user_profile"])) { ?>
+
                         <div class="dropdown d-none d-md-flex">
                             <button class="btn-account" type="button" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false"><span class="user-avatar user-avatar-md"><img
@@ -407,7 +409,7 @@
                             <div class="dropdown-menu">
                                 <div class="dropdown-arrow d-lg-none" x-arrow=""></div>
                                 <div class="dropdown-arrow ml-3 d-none d-lg-block"></div>
-                                <a class="dropdown-item" href="user-profile.html"><span
+                                <a class="dropdown-item" href="userdatos"><span
                                         class="dropdown-icon oi oi-person"></span> Profile
                                 </a> <a class="dropdown-item" href="<?php echo BASE_URL?>login/logout"><span
                                         class="dropdown-icon oi oi-account-logout"></span>
@@ -415,6 +417,8 @@
                                 </a>
                             </div><!-- /.dropdown-menu -->
                         </div><!-- /.btn-account -->
+
+                      <?php } ?>
                     </div><!-- /.top-bar-item -->
                 </div><!-- /.top-bar-list -->
             </div><!-- /.top-bar -->
@@ -463,7 +467,6 @@
                             <!-- .menu-item -->
                             <?php echo $_SESSION["session"]["user_modulos"]?>
 
-                         
                             <li class="menu-item has-child">
                                 <a href="#" class="menu-link"><span class="menu-icon oi oi-person"></span> <span
                                         class="menu-text">PACIENTE</span> <span

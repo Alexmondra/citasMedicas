@@ -216,7 +216,7 @@
     function verModuloId(id) {
         $("#title").text("Actualizar Registro");
         $('#cboOpcion').removeAttr('onchange');
-        $.ajax({
+        $.ajax({ 
             url: "<?php echo BASE_URL ?>autorizacion/verModuloID/" + id,
             type: "GET",
             success: function(response) {

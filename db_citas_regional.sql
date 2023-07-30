@@ -15,17 +15,12 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema citas_regional
 -- -----------------------------------------------------
 
-drop database `citas_regional`;
-
-CREATE SCHEMA IF NOT EXISTS `citas_regional` DEFAULT CHARACTER SET latin1 ;
-
-
-USE `citas_regional` ;
+USE bwkaescheczk2jl0iegf;
 
 -- -----------------------------------------------------
--- Table `citas_regional`.`persona`
+-- Table.`persona`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `citas_regional`.`persona` (
+CREATE TABLE IF NOT EXISTS`persona` (
   `id_persona` INT(11) NOT NULL AUTO_INCREMENT,
   `img` VARCHAR(200) NULL DEFAULT NULL,
   `tipo_documento` CHAR(1) NULL DEFAULT NULL COMMENT '1:DNI 2:PASAPORTE 3:CARNET_EXTRANJERIA 4:CARNET_IDENTIDAD 5:CARNET_PERMISO',
@@ -46,9 +41,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `citas_regional`.`paciente`
+-- Table`paciente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `citas_regional`.`paciente` (
+CREATE TABLE IF NOT EXISTS`paciente` (
   `id_paciente` INT(11) NOT NULL AUTO_INCREMENT,
   `id_persona` INT(11) NOT NULL,
   `ocupacion` VARCHAR(45) NULL DEFAULT NULL,
@@ -61,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `citas_regional`.`paciente` (
   INDEX `fk_paciente_persona1_idx` (`id_persona` ASC) VISIBLE,
   CONSTRAINT `fk_paciente_persona1`
     FOREIGN KEY (`id_persona`)
-    REFERENCES `citas_regional`.`persona` (`id_persona`)
+    REFERENCES`persona` (`id_persona`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -70,7 +65,7 @@ DEFAULT CHARACTER SET = latin1;
 
 
 
-CREATE TABLE IF NOT EXISTS`citas_regional`.`perfiles` (
+CREATE TABLE IF NOT EXISTS `perfiles` (
   `id_perfil` INT(11) NOT NULL AUTO_INCREMENT,
   `imagen` VARCHAR(50) NULL DEFAULT NULL,
   `perfil` VARCHAR(30) NOT NULL,
@@ -82,9 +77,9 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `citas_regional`.`usuario`
+-- Table`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `citas_regional`.`usuario` (
+CREATE TABLE IF NOT EXISTS`usuario` (
   `id_usuario` INT(11) NOT NULL AUTO_INCREMENT,
   `id_persona` INT(11) NOT NULL,
   `id_perfil` INT(11) NOT NULL,
@@ -99,12 +94,12 @@ CREATE TABLE IF NOT EXISTS `citas_regional`.`usuario` (
   INDEX `fk_usuario_perfiles1_idx` (`id_perfil` ASC) VISIBLE,
   CONSTRAINT `fk_medico_persona1`
     FOREIGN KEY (`id_persona`)
-    REFERENCES `citas_regional`.`persona` (`id_persona`)
+    REFERENCES`persona` (`id_persona`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuario_perfiles1`
     FOREIGN KEY (`id_perfil`)
-    REFERENCES`citas_regional`.`perfiles` (`id_perfil`)
+    REFERENCES `perfiles` (`id_perfil`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -113,9 +108,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `citas_regional`.`cita`
+-- Table`cita`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `citas_regional`.`cita` (
+CREATE TABLE IF NOT EXISTS`cita` (
   `id_cita` INT(11) NOT NULL AUTO_INCREMENT,
   `id_paciente` INT(11) NOT NULL,
   `id_medico` INT(11) NOT NULL,
@@ -134,12 +129,12 @@ CREATE TABLE IF NOT EXISTS `citas_regional`.`cita` (
   INDEX `fk_cita_usuario1_idx` (`id_medico` ASC) VISIBLE,
   CONSTRAINT `fk_cita_paciente1`
     FOREIGN KEY (`id_paciente`)
-    REFERENCES `citas_regional`.`paciente` (`id_paciente`)
+    REFERENCES`paciente` (`id_paciente`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_cita_usuario1`
     FOREIGN KEY (`id_medico`)
-    REFERENCES `citas_regional`.`usuario` (`id_usuario`)
+    REFERENCES`usuario` (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -148,9 +143,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `citas_regional`.`atencion_cita`
+-- Table`atencion_cita`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `citas_regional`.`atencion_cita` (
+CREATE TABLE IF NOT EXISTS`atencion_cita` (
   `id_atencion` INT(11) NOT NULL AUTO_INCREMENT,
   `id_cita` INT(11) NOT NULL,
   `id_admisionista` INT(11) NOT NULL,
@@ -162,12 +157,12 @@ CREATE TABLE IF NOT EXISTS `citas_regional`.`atencion_cita` (
   INDEX `fk_atencion_cita_usuario1_idx` (`id_admisionista` ASC) VISIBLE,
   CONSTRAINT `fk_atencion_cita_cita1`
     FOREIGN KEY (`id_cita`)
-    REFERENCES `citas_regional`.`cita` (`id_cita`)
+    REFERENCES`cita` (`id_cita`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_atencion_cita_usuario1`
     FOREIGN KEY (`id_admisionista`)
-    REFERENCES `citas_regional`.`usuario` (`id_usuario`)
+    REFERENCES`usuario` (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -176,9 +171,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `citas_regional`.`especialidad`
+-- Table`especialidad`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `citas_regional`.`especialidad` (
+CREATE TABLE IF NOT EXISTS`especialidad` (
   `id_especialidad` INT(11) NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL DEFAULT NULL,
   `descripcion` VARCHAR(100) NULL DEFAULT NULL,
@@ -190,9 +185,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `citas_regional`.`historia`
+-- Table`historia`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `citas_regional`.`historia` (
+CREATE TABLE IF NOT EXISTS`historia` (
   `id_historia` INT(11) NOT NULL AUTO_INCREMENT,
   `fecha` DATETIME NULL DEFAULT NULL,
   `resultado` VARCHAR(45) NULL DEFAULT NULL,
@@ -205,12 +200,12 @@ CREATE TABLE IF NOT EXISTS `citas_regional`.`historia` (
   INDEX `fk_historia_medico_idx` (`id_medico` ASC) VISIBLE,
   CONSTRAINT `fk_historia_medico`
     FOREIGN KEY (`id_medico`)
-    REFERENCES `citas_regional`.`usuario` (`id_usuario`)
+    REFERENCES`usuario` (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_historia_paciente1`
     FOREIGN KEY (`id_paciente`)
-    REFERENCES `citas_regional`.`paciente` (`id_paciente`)
+    REFERENCES`paciente` (`id_paciente`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -219,9 +214,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `citas_regional`.`horario`
+-- Table`horario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `citas_regional`.`horario` (
+CREATE TABLE IF NOT EXISTS`horario` (
   `id_horario` INT(11) NOT NULL AUTO_INCREMENT,
   `id_usuario` INT(11) NOT NULL,
   `fecha` DATE NULL DEFAULT NULL,
@@ -232,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `citas_regional`.`horario` (
   INDEX `fk_horario_usuario1_idx` (`id_usuario` ASC) VISIBLE,
   CONSTRAINT `fk_horario_usuario1`
     FOREIGN KEY (`id_usuario`)
-    REFERENCES `citas_regional`.`usuario` (`id_usuario`)
+    REFERENCES`usuario` (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -241,9 +236,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `citas_regional`.`pagos`
+-- Table`pagos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `citas_regional`.`pagos` (
+CREATE TABLE IF NOT EXISTS`pagos` (
   `id_pagos` INT(11) NOT NULL AUTO_INCREMENT,
   `id_cita` INT(11) NOT NULL,
   `id_admisionista` INT(11) NOT NULL,
@@ -255,12 +250,12 @@ CREATE TABLE IF NOT EXISTS `citas_regional`.`pagos` (
   INDEX `fk_pagos_usuario1_idx` (`id_admisionista` ASC) VISIBLE,
   CONSTRAINT `fk_pagos_cita1`
     FOREIGN KEY (`id_cita`)
-    REFERENCES `citas_regional`.`cita` (`id_cita`)
+    REFERENCES`cita` (`id_cita`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_pagos_usuario1`
     FOREIGN KEY (`id_admisionista`)
-    REFERENCES `citas_regional`.`usuario` (`id_usuario`)
+    REFERENCES`usuario` (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -268,9 +263,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `citas_regional`.`precios`
+-- Table`precios`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `citas_regional`.`precios` (
+CREATE TABLE IF NOT EXISTS`precios` (
   `id_precio` INT(11) NOT NULL AUTO_INCREMENT,
   `fecha` DATETIME NULL DEFAULT NULL,
   `precio` FLOAT NULL DEFAULT NULL,
@@ -281,12 +276,12 @@ CREATE TABLE IF NOT EXISTS `citas_regional`.`precios` (
   INDEX `fk_precios_especialidad1_idx` (`id_especialidad` ASC) VISIBLE,
   CONSTRAINT `fk_precios_especialidad1`
     FOREIGN KEY (`id_especialidad`)
-    REFERENCES `citas_regional`.`especialidad` (`id_especialidad`)
+    REFERENCES`especialidad` (`id_especialidad`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_precios_usuario1`
     FOREIGN KEY (`id_administrador`)
-    REFERENCES `citas_regional`.`usuario` (`id_usuario`)
+    REFERENCES`usuario` (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -295,9 +290,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `citas_regional`.`reprogramaciones`
+-- Table`reprogramaciones`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `citas_regional`.`reprogramaciones` (
+CREATE TABLE IF NOT EXISTS`reprogramaciones` (
   `id_reprogramacin` INT(11) NOT NULL AUTO_INCREMENT,
   `id_cita` INT(11) NOT NULL,
   `fecha_anterior` DATETIME NULL DEFAULT NULL,
@@ -306,7 +301,7 @@ CREATE TABLE IF NOT EXISTS `citas_regional`.`reprogramaciones` (
   INDEX `fk_reprogramaciones_cita1_idx` (`id_cita` ASC) VISIBLE,
   CONSTRAINT `fk_reprogramaciones_cita1`
     FOREIGN KEY (`id_cita`)
-    REFERENCES `citas_regional`.`cita` (`id_cita`)
+    REFERENCES`cita` (`id_cita`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -315,9 +310,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `citas_regional`.`usuario_especialidad`
+-- Table`usuario_especialidad`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `citas_regional`.`usuario_especialidad` (
+CREATE TABLE IF NOT EXISTS`usuario_especialidad` (
   `id_usuario_especialidad` INT(11) NOT NULL AUTO_INCREMENT,
   `usuario_id_usuario` INT(11) NOT NULL,
   `especialidad_id_especialidad` INT(11) NOT NULL,
@@ -326,12 +321,12 @@ CREATE TABLE IF NOT EXISTS `citas_regional`.`usuario_especialidad` (
   INDEX `fk_usuario_has_especialidad_usuario1_idx` (`usuario_id_usuario` ASC) VISIBLE,
   CONSTRAINT `fk_usuario_has_especialidad_especialidad1`
     FOREIGN KEY (`especialidad_id_especialidad`)
-    REFERENCES `citas_regional`.`especialidad` (`id_especialidad`)
+    REFERENCES`especialidad` (`id_especialidad`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuario_has_especialidad_usuario1`
     FOREIGN KEY (`usuario_id_usuario`)
-    REFERENCES `citas_regional`.`usuario` (`id_usuario`)
+    REFERENCES`usuario` (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -340,9 +335,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table`citas_regional`.`modulos`
+-- Table `modulos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS`citas_regional`.`modulos` (
+CREATE TABLE IF NOT EXISTS `modulos` (
   `id_modulo` INT(11) NOT NULL AUTO_INCREMENT,
   `descripcion` VARCHAR(50) NOT NULL,
   `url` VARCHAR(30) NULL DEFAULT NULL,
@@ -352,7 +347,7 @@ CREATE TABLE IF NOT EXISTS`citas_regional`.`modulos` (
   INDEX `submodulo` (`submodulo` ASC) VISIBLE,
   CONSTRAINT `fk_modulos_submodulo`
     FOREIGN KEY (`submodulo`)
-    REFERENCES`citas_regional`.`modulos` (`id_modulo`))
+    REFERENCES `modulos` (`id_modulo`))
 ENGINE = InnoDB
 
 DEFAULT CHARACTER SET = utf8mb3;
@@ -363,9 +358,9 @@ DEFAULT CHARACTER SET = utf8mb3;
                alter table horario add token varchar(100);
                
 -- -----------------------------------------------------
--- Table`citas_regional`.`roles`
+-- Table `roles`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS`citas_regional`.`roles` (
+CREATE TABLE IF NOT EXISTS `roles` (
   `id_rol` INT(11) NOT NULL AUTO_INCREMENT,
   `id_modulo` INT(11) NOT NULL,
   `id_perfil` INT(11) NOT NULL,
@@ -379,23 +374,24 @@ CREATE TABLE IF NOT EXISTS`citas_regional`.`roles` (
   INDEX `fk_roles_perfil` (`id_perfil` ASC) VISIBLE,
   CONSTRAINT `fk_roles_modulos`
     FOREIGN KEY (`id_modulo`)
-    REFERENCES`citas_regional`.`modulos` (`id_modulo`),
+    REFERENCES `modulos` (`id_modulo`),
   CONSTRAINT `fk_roles_perfil`
     FOREIGN KEY (`id_perfil`)
-    REFERENCES`citas_regional`.`perfiles` (`id_perfil`))
+    REFERENCES `perfiles` (`id_perfil`))
 ENGINE = InnoDB
-
 DEFAULT CHARACTER SET = utf8mb3;
 
 alter table especialidad add imagen varchar(50);
+
+ALTER TABLE usuario_especialidad RENAME COLUMN usuario_id_usuario to id_usuario;
+
+ALTER TABLE usuario_especialidad RENAME COLUMN especialidad_id_especialidad to id_especialidad;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
-
-
---datos
 
 

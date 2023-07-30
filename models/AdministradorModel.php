@@ -67,6 +67,42 @@ class AdministradorModel{
         $this->db->query($sql1); 
 
     }
+
+    // control user 
+
+    public function getAllUser(){
+        $sql = " SELECT persona.nombre as nombre, persona.numero_documento as dni,
+                       usuario.estado as estado, 
+                        perfiles.perfil as rol , usuario.id_usuario as id
+                FROM usuario
+                INNER JOIN perfiles ON perfiles.id_perfil = usuario.id_perfil
+                INNER JOIN persona ON persona.id_persona = usuario.id_persona 
+                WHERE usuario.eliminado IS NULL";
+
+        $consulta = $this->db->query($sql);
+        $registros = array();
+        while ($row = $consulta->fetch_assoc()) {
+            $registros[] = $row;
+        }
+        return $registros;
+    }
+
+    public function setInhabilita($id){
+        $sql1 ="UPDATE usuario SET estado = 0 WHERE usuario.id_usuario = '".$id."'";
+
+        $this->db->query($sql1); 
+    }
+    public function sethabilita($id){
+        $sql1 ="UPDATE usuario SET estado = 1 WHERE usuario.id_usuario = '".$id."'";
+
+        $this->db->query($sql1); 
+    }
+
+    public function setEliminar($id){
+        $sql1 ="UPDATE usuario SET eliminado = CURRENT_TIMESTAMP WHERE usuario.id_usuario = '".$id."'";
+        $this->db->query($sql1); 
+    }
+
     
 
 

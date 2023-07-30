@@ -21,7 +21,7 @@ class AdministradorController{
        $this->errores = array(); 
    }
 
-   public function index(){
+    public function index(){
 
       $data = array(
       "contenido" => "views/administrador/especialidades.php",
@@ -30,18 +30,9 @@ class AdministradorController{
       );
 
       require_once TEMPLATE;
-   }
+    }
 
-    public function especialidades(){
-        $data = array(
-            "contenido" => "views/administrador/especialidades.php",
-            "titulo"    => "control de especialidades",
-            "especialidades" =>$this->administrador->getAllEspecialidades()    
-        );
-        require_once TEMPLATE;
-     }  
-     
-     public function registrarEspe(){
+    public function registrarEspe(){
          if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $nomArchivo = $_FILES["file"]["name"]; //obtener el nombre del archivo
@@ -88,30 +79,74 @@ class AdministradorController{
              $data["contenido"] = ERROR_404;
              require_once TEMPLATE;
          }
-     }
+    }
  
-     public function verEspecialidad($id){
+    public function verEspecialidad($id){
          $data = $this->administrador->getResultIdEspeci($id);
          echo json_encode(array("data" => $data));
-     }
+    }
 
-     public function ActivarEspecialidad($id){
+    public function ActivarEspecialidad($id){
         if($_SERVER["REQUEST_METHOD"]=="GET"){
            $this->administrador->activarEs($id);
            $_SESSION['mensaje'] = "especialidad en servicio";
            $url = BASE_URL."administrador";
            header("Location: $url");
          }
- }
+    }
 
-     public function desactivarEspecialidad($id){
+    public function desactivarEspecialidad($id){
             if($_SERVER["REQUEST_METHOD"]=="GET"){
                $this->administrador->desactivarEs($id);
                $_SESSION['mensaje'] = "especialidad fuera de servicio";
                $url = BASE_URL."administrador";
                header("Location: $url");
              }
-     }
+    }
+
+    // CONTROL DE  usuarios
+
+    public function controlUser(){
+
+        $data = array(
+            "contenido" => "views/administrador/controlUser.php",
+            "titulo"    => "usuarios totales del sistema",
+            "usuarios" => $this->administrador->getAllUser()
+            );
+        require_once TEMPLATE;
+
+    }
+
+    public function inhabilitar($id){
+        if($_SERVER["REQUEST_METHOD"]=="GET"){
+            $this->administrador->setInhabilita($id);
+        } 
+         $_SESSION['mensaje'] = "Datos actualizados correctamente";
+         $url = BASE_URL."administrador/controlUser";
+         header("Location: $url");
+    }
+
+    public function habilitar($id){
+        if($_SERVER["REQUEST_METHOD"]=="GET"){
+            $this->administrador->sethabilita($id);
+        } 
+         $_SESSION['mensaje'] = "Datos actualizados correctamente";
+         $url = BASE_URL."administrador/controlUser";
+         header("Location: $url");
+    }
+
+    public function eliminar($id){
+        if($_SERVER["REQUEST_METHOD"]=="GET"){
+            $this->administrador->setEliminar($id);
+        } 
+         $_SESSION['mensaje'] = "Usuario Eliminado correctamente";
+         $url = BASE_URL."administrador/controlUser";
+         header("Location: $url");
+
+    }
+
+
+
 
 
      

@@ -202,6 +202,26 @@ class AutorizacionModel{
     }
 
 
+    // permisos por modulo  
+
+    // Dentro del modelo MedicoModel, agrega la función getModuloIdByURL
+    
+public function getModuloIdByURL($url){
+    $sql = "SELECT id_modulo FROM modulos WHERE url = ?";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bind_param("s", $url);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $moduloId = null;
+    if ($row = $result->fetch_assoc()) {
+        $moduloId = $row['id_modulo'];
+    }
+    return $moduloId;
+}
+
+
+
 
 
 }

@@ -98,8 +98,7 @@ class AutorizacionController{
         }
     }
 
-    public function verModuloID($id)
-    {
+    public function verModuloID($id){
         $data = $this->db->getResultID($id);
         echo json_encode(array("data" => $data));
     }
@@ -419,6 +418,16 @@ class AutorizacionController{
         }
     }
 
-}
+
+    // permisos en cada modulo (vista)
+
+    public function getmoduloActual(){
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $remainingUrl = $_POST["remainingUrl"];
+            $moduloId = $this->db->getModuloIdByURL($remainingUrl);
+             echo $moduloId;
+            }
+        }
+    }
 
 ?>

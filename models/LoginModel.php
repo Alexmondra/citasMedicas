@@ -16,7 +16,7 @@ class LoginModel
         
         $sql = "SELECT * FROM usuario INNER JOIN persona ON persona.id_persona = usuario.id_persona
                                       INNER JOIN perfiles ON perfiles.id_perfil = usuario.id_perfil
-                WHERE usuario.usuario='".$user."' AND usuario.clave='".$pass."'";
+                WHERE usuario.usuario='".$user."' AND usuario.clave='".$pass."' AND  usuario.eliminado IS NULL";
         $consulta = $this->db->query($sql);
         $row = $consulta->fetch_assoc();
         return $row;
@@ -78,10 +78,34 @@ class LoginModel
          return $this->registros;        
     }
 
+    public function getPermisos($id_perfil)
+    {
+        $sql = "SELECT id_modulo, c, r, u, d, p FROM roles WHERE id_perfil = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("i", $id_perfil);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        $permisosPorModulo = array();
+        while ($row = $result->fetch_assoc()) {
+            $idModulo = $row['id_modulo'];
+            unset($row['id_modulo']); 
+            $permisosPorModulo[$idModulo] = $row;
+        }
+    
+        return $permisosPorModulo;
+    }
+    
+    
+
+ 
+
+
+
     public function actualizarIntentosFallidos($nombreUser, $numIntentos)
     {
         $sql = "UPDATE usuario SET intentos = '" . $numIntentos. "'  
-        WHERE usuario = '" . $nombreUser . "'";
+        WHERE usuario = '" . $nombreUser . "'AND  usuario.eliminado IS NULL";
         $this->db->query($sql);
     }
 
@@ -89,7 +113,7 @@ class LoginModel
     {
         $sql = "SELECT * FROM usuario
         INNER JOIN perfiles on perfiles.id_perfil = usuario.id_perfil
-        WHERE usuario='".$user."'";
+        WHERE usuario='".$user."'AND  usuario.eliminado IS NULL";
         $consulta = $this->db->query($sql);
         $row = $consulta->fetch_assoc();
         return $row;

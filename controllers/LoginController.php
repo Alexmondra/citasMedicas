@@ -41,6 +41,7 @@ class  LoginController
                
                         if(isset($consulta)){
                             if($consulta["estado"]==1){
+                                $user_permisos = $this->db->getPermisos($consulta["id_perfil"]);
                                 $this->db->actualizarIntentosFallidos($usuario, 0);
                                     $data_session = [
                                         "loggin_in"     =>1,
@@ -49,8 +50,11 @@ class  LoginController
                                         "user_profile"  =>$consulta["perfil"],
                                         "user_IDprofile"=>$consulta["id_perfil"],
                                         "img" =>$consulta["img"],
-                                        "user_modulos"  => $this->menu($consulta["id_perfil"])
+                                        "user_modulos"  => $this->menu($consulta["id_perfil"]),
+                                        "user_permisos" =>$user_permisos,
                                     ];
+
+                                    
                                         $_SESSION["session"] = $data_session;
                                         $url = BASE_URL."cpanel";
                                         header("Location: $url");
@@ -93,7 +97,7 @@ class  LoginController
             $cadena.="<span class='menu-text'>".$mod["descripcion"]."</span></a>";
 
             $submodulo = $this->db->getSubModulo($idPerfil,$mod["id_modulo"]);
-            
+             
             $cadena.="<ul class='menu'>";
             foreach($submodulo as $sub){
                 $cadena.= "<li class='menu-item'>";
@@ -105,8 +109,6 @@ class  LoginController
         }
         return $cadena; 
     }
-    
-
     public function logout(){
         session_unset();
         session_destroy();

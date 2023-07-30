@@ -1,4 +1,5 @@
 <div class="wrapper">
+    <span class="font-weight-bold" id="moduloAct"></span>
     <!-- .page -->
     <div class="page">
         <!-- .page-inner -->
@@ -25,7 +26,8 @@
 
             <div class="page-section">
 
-                <form action="<?php echo BASE_URL;?>medico/registrarNuevo/<?php echo $_SESSION["session"]["user_id"];?>"method="POST" class="row gx-3 gy-2 align-items-center" id="form-nuevo" style="display: none;">
+                <form action="<?php echo BASE_URL;?>medico/registrarNuevo/<?php echo $_SESSION["session"]["user_id"];?>"
+                    method="POST" class="row gx-3 gy-2 align-items-center" id="form-nuevo" style="display: none;">
                     <div class="col-sm-3">
                         <label class="visually-hidden" for="specificSizeSelect">fecha</label>
                         <input type="date" class="form-control" id="txtdate" name="txtdate">
@@ -99,7 +101,7 @@
                                                 </a>
                                             </td>
                                         </tr>
-                                        <?php endforeach?>
+                                        <?php endforeach ?>
                                     </tbody><!-- /tbody -->
                                 </table><!-- /.table -->
                             </div>
@@ -169,15 +171,15 @@ $(document).ready(function() {
         $("#form-nuevo").toggle();
         var btn = document.getElementById('nuevo-registro-btn');
         var icono = document.getElementById('icono-registro');
-            if (btn.classList.contains('clicleado')) {
-                btn.classList.remove('clicleado');
-                icono.classList.remove('fa-eye-slash');
-                icono.classList.add('fa-save');
-            } else {
-                btn.classList.add('clicleado');
-                icono.classList.remove('fa-save');
-                icono.classList.add('fa-eye-slash');
-            }
+        if (btn.classList.contains('clicleado')) {
+            btn.classList.remove('clicleado');
+            icono.classList.remove('fa-eye-slash');
+            icono.classList.add('fa-save');
+        } else {
+            btn.classList.add('clicleado');
+            icono.classList.remove('fa-save');
+            icono.classList.add('fa-eye-slash');
+        }
     });
 });
 
@@ -217,4 +219,37 @@ function actualizarDatos(token) {
         }
     });
 }
+
+
+(function () {
+        var baseUrl = "<?php echo BASE_URL; ?>";
+        var currentUrl = window.location.href;
+        var remainingUrl = currentUrl.substring(baseUrl.length);
+        document.getElementById("moduloAct").textContent = remainingUrl;
+        $.ajax({
+            url: "<?php echo BASE_URL; ?>autorizacion/getmoduloActual",
+            type: "POST",
+            data: { remainingUrl: remainingUrl },
+            success: function(response) {
+                document.getElementById("moduloAct").textContent  = response;
+            }
+        });
+    })();
+    
+
+    $(document).ready(function() {
+    var moduloAct = parseInt($("#moduloAct").text());
+    var permisos = <?php echo json_encode($_SESSION["session"]["user_permisos"]); ?>;
+    var permisoRActivo = permisos[moduloAct] && permisos[moduloAct]['r'] === 1;
+
+    if (permisoRActivo) {
+        $("#nuevo-registro-btn").prop("disabled", false);
+    } else {
+        $("#nuevo-registro-btn").prop("disabled", true);
+    }
+
+
+});
+
+
 </script>

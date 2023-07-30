@@ -44,16 +44,24 @@ class MedicoController{
       require_once TEMPLATE;
    }
 
-   public function horario(){
+   public function horario() {
+     
+  
       $data = array(
-         "contenido" => "views/medico/horario.php",
-         "titulo"    => "ELECCION DE HORARIO DE ATENCION",
-         "horario"  => $this->medico->gethorario($_SESSION["session"]["user_id"])
+          "contenido" => "views/medico/horario.php",
+          "titulo" => "ELECCION DE HORARIO DE ATENCION",
+          "horario" => $this->medico->gethorario($_SESSION["session"]["user_id"]),
+      );
+  
+      require_once TEMPLATE;
+  }
+  
 
-         );
-   
-         require_once TEMPLATE;
-   }
+ 
+
+
+
+  
 
    public function verhorario($token) {
       $data = $this->medico->getResultID($token);
